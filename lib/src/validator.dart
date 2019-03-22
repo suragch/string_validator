@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'helpers.dart';
 
-RegExp _email = new RegExp(r"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$");
+RegExp _email = new RegExp(
+    r"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$");
 
-RegExp _ipv4Maybe = new RegExp(r'^(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)$');
-RegExp _ipv6 = new RegExp(r'^::|^::1|^([a-fA-F0-9]{1,4}::?){1,7}([a-fA-F0-9]{1,4})$');
+RegExp _ipv4Maybe =
+    new RegExp(r'^(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)$');
+RegExp _ipv6 =
+    new RegExp(r'^::|^::1|^([a-fA-F0-9]{1,4}::?){1,7}([a-fA-F0-9]{1,4})$');
 
 RegExp _surrogatePairsRegExp = new RegExp(r'[\uD800-\uDBFF][\uDC00-\uDFFF]');
 
@@ -13,41 +16,47 @@ RegExp _alpha = new RegExp(r'^[a-zA-Z]+$');
 RegExp _alphanumeric = new RegExp(r'^[a-zA-Z0-9]+$');
 RegExp _numeric = new RegExp(r'^-?[0-9]+$');
 RegExp _int = new RegExp(r'^(?:-?(?:0|[1-9][0-9]*))$');
-RegExp _float = new RegExp(r'^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$');
+RegExp _float =
+    new RegExp(r'^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$');
 RegExp _hexadecimal = new RegExp(r'^[0-9a-fA-F]+$');
 RegExp _hexcolor = new RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
-RegExp _base64 = new RegExp(r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{4})$');
+RegExp _base64 = new RegExp(
+    r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{4})$');
 
-RegExp _creditCard = new RegExp(r'^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$');
+RegExp _creditCard = new RegExp(
+    r'^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$');
 
 RegExp _isbn10Maybe = new RegExp(r'^(?:[0-9]{9}X|[0-9]{10})$');
 RegExp _isbn13Maybe = new RegExp(r'^(?:[0-9]{13})$');
 
 Map _uuid = {
-  '3': new RegExp(r'^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$'),
-  '4': new RegExp(r'^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'),
-  '5': new RegExp(r'^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'),
-  'all': new RegExp(r'^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$')
+  '3': new RegExp(
+      r'^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$'),
+  '4': new RegExp(
+      r'^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'),
+  '5': new RegExp(
+      r'^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'),
+  'all': new RegExp(
+      r'^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$')
 };
 
 RegExp _multibyte = new RegExp(r'[^\x00-\x7F]');
 RegExp _ascii = new RegExp(r'^[\x00-\x7F]+$');
-RegExp _fullWidth = new RegExp(r'[^\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
-RegExp _halfWidth = new RegExp(r'[\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
-
+RegExp _fullWidth = new RegExp(
+    r'[^\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
+RegExp _halfWidth = new RegExp(
+    r'[\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
 
 /// check if the string matches the comparison
 bool equals(String str, comparison) {
   return str == comparison.toString();
 }
 
-
 /// check if the string contains the substring
 bool contains(String str, substring) {
-  return str.indexOf(substring.toString()) >= 0;
+  return str.contains(substring);
 }
-
 
 /// check if string matches the pattern.
 bool matches(String str, pattern) {
@@ -55,12 +64,10 @@ bool matches(String str, pattern) {
   return re.hasMatch(str);
 }
 
-
 /// check if the string is an email
 bool isEmail(String str) {
   return _email.hasMatch(str.toLowerCase());
 }
-
 
 /// check if the string is a URL
 ///
@@ -69,13 +76,15 @@ bool isEmail(String str) {
 /// 'require_protocol': false, 'allow_underscores': false,
 /// 'host_whitelist': false, 'host_blacklist': false }`.
 bool isURL(String str, [Map options]) {
-  if (str == null || str.length == 0 || str.length > 2083 ||
+  if (str == null ||
+      str.isEmpty ||
+      str.length > 2083 ||
       str.indexOf('mailto:') == 0) {
     return false;
   }
 
   Map default_url_options = {
-    'protocols': [ 'http', 'https', 'ftp' ],
+    'protocols': ['http', 'https', 'ftp'],
     'require_tld': true,
     'require_protocol': false,
     'allow_underscores': false
@@ -83,8 +92,18 @@ bool isURL(String str, [Map options]) {
 
   options = merge(options, default_url_options);
 
-  var protocol, user, pass, auth, host, hostname, port, port_str, path, query,
-      hash, split;
+  var protocol,
+      user,
+      pass,
+      auth,
+      host,
+      hostname,
+      port,
+      port_str,
+      path,
+      query,
+      hash,
+      split;
 
   // check protocol
   split = str.split('://');
@@ -150,7 +169,8 @@ bool isURL(String str, [Map options]) {
     } catch (e) {
       return false;
     }
-    if (!new RegExp(r'^[0-9]+$').hasMatch(port_str) || port <= 0 ||
+    if (!new RegExp(r'^[0-9]+$').hasMatch(port_str) ||
+        port <= 0 ||
         port > 65535) {
       return false;
     }
@@ -171,9 +191,7 @@ bool isURL(String str, [Map options]) {
   }
 
   return true;
-
 }
-
 
 /// check if the string is an IP (version 4 or 6)
 ///
@@ -193,21 +211,17 @@ bool isIP(String str, [version]) {
   return version == '6' && _ipv6.hasMatch(str);
 }
 
-
 /// check if the string is a fully qualified domain name (e.g. domain.com).
 ///
 /// `options` is a `Map` which defaults to `{ 'require_tld': true, 'allow_underscores': false }`.
 bool isFQDN(str, [options]) {
-  Map default_fqdn_options = {
-    'require_tld': true,
-    'allow_underscores': false
-  };
+  Map default_fqdn_options = {'require_tld': true, 'allow_underscores': false};
 
   options = merge(options, default_fqdn_options);
   List parts = str.split('.');
   if (options['require_tld']) {
     var tld = parts.removeLast();
-    if (parts.length == 0 || !new RegExp(r'^[a-z]{2,}$').hasMatch(tld)) {
+    if (parts.isEmpty || !new RegExp(r'^[a-z]{2,}$').hasMatch(tld)) {
       return false;
     }
   }
@@ -222,7 +236,8 @@ bool isFQDN(str, [options]) {
     if (!new RegExp(r'^[a-z\\u00a1-\\uffff0-9-]+$').hasMatch(part)) {
       return false;
     }
-    if (part[0] == '-' || part[part.length - 1] == '-' ||
+    if (part[0] == '-' ||
+        part[part.length - 1] == '-' ||
         part.indexOf('---') >= 0) {
       return false;
     }
@@ -230,66 +245,55 @@ bool isFQDN(str, [options]) {
   return true;
 }
 
-
 /// check if the string contains only letters (a-zA-Z).
 bool isAlpha(String str) {
   return _alpha.hasMatch(str);
 }
-
 
 /// check if the string contains only numbers
 bool isNumeric(String str) {
   return _numeric.hasMatch(str);
 }
 
-
 /// check if the string contains only letters and numbers
 bool isAlphanumeric(String str) {
   return _alphanumeric.hasMatch(str);
 }
-
 
 /// check if a string is base64 encoded
 bool isBase64(String str) {
   return _base64.hasMatch(str);
 }
 
-
 /// check if the string is an integer
 bool isInt(String str) {
   return _int.hasMatch(str);
 }
-
 
 /// check if the string is a float
 bool isFloat(String str) {
   return _float.hasMatch(str);
 }
 
-
 /// check if the string is a hexadecimal number
 bool isHexadecimal(String str) {
   return _hexadecimal.hasMatch(str);
 }
-
 
 /// check if the string is a hexadecimal color
 bool isHexColor(String str) {
   return _hexcolor.hasMatch(str);
 }
 
-
 /// check if the string is lowercase
 bool isLowercase(String str) {
   return str == str.toLowerCase();
 }
 
-
 /// check if the string is uppercase
 bool isUppercase(String str) {
   return str == str.toUpperCase();
 }
-
 
 /// check if the string is a number that's divisible by another
 ///
@@ -297,21 +301,19 @@ bool isUppercase(String str) {
 bool isDivisibleBy(String str, n) {
   try {
     return double.parse(str) % int.parse(n) == 0;
-  } catch(e) {
+  } catch (e) {
     return false;
   }
 }
 
-
 /// check if the string is null
 bool isNull(String str) {
-  return str == null || str.length == 0;
+  return str == null || str.isEmpty;
 }
-
 
 /// check if the string's length falls in a range
 /// If no max is given then any length above min is ok.
-/// 
+///
 /// Note: this function takes into account surrogate pairs.
 bool isLength(String str, int min, [int max]) {
   List surrogatePairs = _surrogatePairsRegExp.allMatches(str).toList();
@@ -319,12 +321,10 @@ bool isLength(String str, int min, [int max]) {
   return len >= min && (max == null || len <= max);
 }
 
-
 /// check if the string's length (in bytes) falls in a range.
 bool isByteLength(String str, int min, [int max]) {
   return str.length >= min && (max == null || str.length <= max);
 }
-
 
 /// check if the string is a UUID (version 3, 4 or 5).
 bool isUUID(String str, [version]) {
@@ -338,7 +338,6 @@ bool isUUID(String str, [version]) {
   return (pat != null && pat.hasMatch(str.toUpperCase()));
 }
 
-
 /// check if the string is a date
 bool isDate(String str) {
   try {
@@ -348,7 +347,6 @@ bool isDate(String str) {
     return false;
   }
 }
-
 
 /// check if the string is a date that's after the specified date
 ///
@@ -365,7 +363,7 @@ bool isAfter(String str, [date]) {
   DateTime str_date;
   try {
     str_date = DateTime.parse(str);
-  } catch(e) {
+  } catch (e) {
     return false;
   }
 
@@ -387,13 +385,12 @@ bool isBefore(String str, [date]) {
   DateTime str_date;
   try {
     str_date = DateTime.parse(str);
-  } catch(e) {
+  } catch (e) {
     return false;
   }
 
   return str_date.isBefore(date);
 }
-
 
 /// check if the string is in an array of allowed values
 bool isIn(String str, values) {
@@ -407,7 +404,6 @@ bool isIn(String str, values) {
 
   return values.indexOf(str) >= 0;
 }
-
 
 /// check if the string is a credit card
 bool isCreditCard(String str) {
@@ -426,21 +422,20 @@ bool isCreditCard(String str) {
     int tmpNum = int.parse(digit);
 
     if (shouldDouble == true) {
-        tmpNum *= 2;
-        if (tmpNum >= 10) {
-            sum += ((tmpNum % 10) + 1);
-        } else {
-            sum += tmpNum;
-        }
-    } else {
+      tmpNum *= 2;
+      if (tmpNum >= 10) {
+        sum += ((tmpNum % 10) + 1);
+      } else {
         sum += tmpNum;
+      }
+    } else {
+      sum += tmpNum;
     }
     shouldDouble = !shouldDouble;
   }
 
   return (sum % 10 == 0);
 }
-
 
 /// check if the string is an ISBN (version 10 or 13)
 bool isISBN(String str, [version]) {
@@ -480,7 +475,6 @@ bool isISBN(String str, [version]) {
   return false;
 }
 
-
 /// check if the string is valid JSON
 bool isJson(str) {
   try {
@@ -491,42 +485,35 @@ bool isJson(str) {
   return true;
 }
 
-
 /// check if the string contains one or more multibyte chars
 bool isMultibyte(String str) {
   return _multibyte.hasMatch(str);
 }
-
 
 /// check if the string contains ASCII chars only
 bool isAscii(String str) {
   return _ascii.hasMatch(str);
 }
 
-
 /// check if the string contains any full-width chars
 bool isFullWidth(String str) {
   return _fullWidth.hasMatch(str);
 }
-
 
 /// check if the string contains any half-width chars
 bool isHalfWidth(String str) {
   return _halfWidth.hasMatch(str);
 }
 
-
 /// check if the string contains a mixture of full and half-width chars
 bool isVariableWidth(String str) {
   return isFullWidth(str) && isHalfWidth(str);
 }
 
-
 /// check if the string contains any surrogate pairs chars
 bool isSurrogatePair(String str) {
   return _surrogatePairsRegExp.hasMatch(str);
 }
-
 
 /// check if the string is a valid hex-encoded representation of a MongoDB ObjectId
 bool isMongoId(String str) {

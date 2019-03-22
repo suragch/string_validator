@@ -1,8 +1,9 @@
 name: string_validator
-version: 0.1.0
-author: Suragch (forked from Karan Goel https://github.com/karan/validator.dart)
+version: 0.1.1
+author: Suragch <studymongolian@gmail.com>
 description: String validation and sanitization for Dart
 homepage: https://github.com/suragch/string_validator
-documentation: https://github.com/suragch/string_validator
+environment:
+  sdk: '>=2.0.0 <3.0.0'
 dev_dependencies:
   test: ^1.5.3

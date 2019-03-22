@@ -1,7 +1,7 @@
 // Helper functions for validator and sanitizer.
 
 shift(List l) {
-  if (l.length >= 1) {
+  if (l.isNotEmpty) {
     var first = l.first;
     l.removeAt(0);
     return first;
