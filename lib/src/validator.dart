@@ -1,4 +1,6 @@
-part of validator;
+import 'dart:convert';
+
+import 'helpers.dart';
 
 RegExp _email = new RegExp(r"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$");
 
@@ -41,9 +43,9 @@ bool equals(String str, comparison) {
 }
 
 
-/// check if the string contains the seed
-bool contains(String str, seed) {
-  return str.indexOf(seed.toString()) >= 0;
+/// check if the string contains the substring
+bool contains(String str, substring) {
+  return str.indexOf(substring.toString()) >= 0;
 }
 
 
@@ -79,7 +81,7 @@ bool isURL(String str, [Map options]) {
     'allow_underscores': false
   };
 
-  options = _merge(options, default_url_options);
+  options = merge(options, default_url_options);
 
   var protocol, user, pass, auth, host, hostname, port, port_str, path, query,
       hash, split;
@@ -87,7 +89,7 @@ bool isURL(String str, [Map options]) {
   // check protocol
   split = str.split('://');
   if (split.length > 1) {
-    protocol = _shift(split);
+    protocol = shift(split);
     if (options['protocols'].indexOf(protocol) == -1) {
       return false;
     }
@@ -98,7 +100,7 @@ bool isURL(String str, [Map options]) {
 
   // check hash
   split = str.split('#');
-  str = _shift(split);
+  str = shift(split);
   hash = split.join('#');
   if (hash != null && hash != "" && new RegExp(r'\s').hasMatch(hash)) {
     return false;
@@ -106,7 +108,7 @@ bool isURL(String str, [Map options]) {
 
   // check query params
   split = str.split('?');
-  str = _shift(split);
+  str = shift(split);
   query = split.join('?');
   if (query != null && query != "" && new RegExp(r'\s').hasMatch(query)) {
     return false;
@@ -114,7 +116,7 @@ bool isURL(String str, [Map options]) {
 
   // check path
   split = str.split('/');
-  str = _shift(split);
+  str = shift(split);
   path = split.join('/');
   if (path != null && path != "" && new RegExp(r'\s').hasMatch(path)) {
     return false;
@@ -123,10 +125,10 @@ bool isURL(String str, [Map options]) {
   // check auth type urls
   split = str.split('@');
   if (split.length > 1) {
-    auth = _shift(split);
+    auth = shift(split);
     if (auth.indexOf(':') >= 0) {
       auth = auth.split(':');
-      user = _shift(auth);
+      user = shift(auth);
       if (!new RegExp(r'^\S+$').hasMatch(user)) {
         return false;
       }
@@ -140,7 +142,7 @@ bool isURL(String str, [Map options]) {
   // check hostname
   hostname = split.join('@');
   split = hostname.split(':');
-  host = _shift(split);
+  host = shift(split);
   if (split.length > 0) {
     port_str = split.join(':');
     try {
@@ -201,7 +203,7 @@ bool isFQDN(str, [options]) {
     'allow_underscores': false
   };
 
-  options = _merge(options, default_fqdn_options);
+  options = merge(options, default_fqdn_options);
   List parts = str.split('.');
   if (options['require_tld']) {
     var tld = parts.removeLast();
@@ -308,7 +310,8 @@ bool isNull(String str) {
 
 
 /// check if the string's length falls in a range
-///
+/// If no max is given then any length above min is ok.
+/// 
 /// Note: this function takes into account surrogate pairs.
 bool isLength(String str, int min, [int max]) {
   List surrogatePairs = _surrogatePairsRegExp.allMatches(str).toList();
@@ -392,7 +395,7 @@ bool isBefore(String str, [date]) {
 }
 
 
-/// check if the string is in a array of allowed values
+/// check if the string is in an array of allowed values
 bool isIn(String str, values) {
   if (values == null || values.length == 0) {
     return false;
@@ -479,9 +482,9 @@ bool isISBN(String str, [version]) {
 
 
 /// check if the string is valid JSON
-bool isJSON(str) {
+bool isJson(str) {
   try {
-    JSON.decode(str);
+    json.decode(str);
   } catch (e) {
     return false;
   }

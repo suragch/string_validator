@@ -1,4 +1,5 @@
-part of validator;
+import 'helpers.dart';
+import 'validator.dart';
 
 Map _default_normalize_email_options = { 'lowercase': true };
 
@@ -27,7 +28,7 @@ double toFloat(String str) {
   try{
     return double.parse(str);
   } catch (e) {
-    return double.NAN;
+    return double.nan;
   }
 }
 
@@ -45,7 +46,7 @@ num toInt(String str, {int radix:10}) {
     try {
       return double.parse(str).toInt();
     } catch (e) {
-      return double.NAN;
+      return double.nan;
     }
   }
 }
@@ -134,7 +135,7 @@ String escape(String str) {
 /// tags (e.g. `some.one+tag@gmail.com` becomes `someone@gmail.com`) and all
 /// `@googlemail.com` addresses are normalized to `@gmail.com`.
 String normalizeEmail(String email, [Map options]) {
-  options = _merge(options, _default_normalize_email_options);
+  options = merge(options, _default_normalize_email_options);
   if (isEmail(email) == false) {
       return '';
   }
