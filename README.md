@@ -7,13 +7,6 @@ The is a new fork of [validator.dart](https://github.com/karan/validator.dart), 
 
 ## Usage
 
-#### Documentation
-
-Complete documentation of the package is available at [ADD DOCS]
-
-For a list of methods, refer to the sections below.
-
-
 ## Validators
 
 - **equals(String str, comparison)** - check if the string matches the comparison.
