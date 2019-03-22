@@ -1,40 +1,18 @@
-validator.dart
+string_validator
 =============
-
-[![Build Status](https://drone.io/github.com/karan/validator.dart/status.png)](https://drone.io/github.com/karan/validator.dart/latest)
 
 String validation and sanitization for Dart.
 
-Port of [chriso's library](https://github.com/chriso/validator.js).
+The is a new fork of [validator.dart](https://github.com/karan/validator.dart), which was originally a port of [validator.js](https://github.com/chriso/validator.js).
 
 ## Usage
 
 #### Documentation
 
-Complete documentation of the package is available at http://www.dartdocs.org/documentation/validator/0.0.7/index.html#validator/validator
+Complete documentation of the package is available at [ADD DOCS]
 
 For a list of methods, refer to the sections below.
 
-#### 1. Depend on it
-
-Add this to your package's `pubspec.yaml` file:
-
-    dependencies:
-      validator: ">=0.0.4 <0.1.0"
-
-#### 2. Install it
-
-You can install packages from the command line:
-
-    $ pub get
-
-Alternatively, your editor might support pub. Check the docs for your editor to learn more.
-
-#### 3. Import it
-
-Now in your Dart code, you can use:
-
-    import 'package:validator/validator.dart';
 
 ## Validators
 
@@ -95,5 +73,6 @@ Now in your Dart code, you can use:
 
 To test the package, run:
 
-    $ ./tool/run_tests.sh
-
+```
+$ pub run test test/test_all.dart
+```
