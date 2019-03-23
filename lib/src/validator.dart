@@ -2,50 +2,50 @@ import 'dart:convert';
 
 import 'helpers.dart';
 
-RegExp _email = new RegExp(
+RegExp _email = RegExp(
     r"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$");
 
 RegExp _ipv4Maybe =
-    new RegExp(r'^(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)$');
+   RegExp(r'^(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)$');
 RegExp _ipv6 =
-    new RegExp(r'^::|^::1|^([a-fA-F0-9]{1,4}::?){1,7}([a-fA-F0-9]{1,4})$');
+   RegExp(r'^::|^::1|^([a-fA-F0-9]{1,4}::?){1,7}([a-fA-F0-9]{1,4})$');
 
-RegExp _surrogatePairsRegExp = new RegExp(r'[\uD800-\uDBFF][\uDC00-\uDFFF]');
+RegExp _surrogatePairsRegExp = RegExp(r'[\uD800-\uDBFF][\uDC00-\uDFFF]');
 
-RegExp _alpha = new RegExp(r'^[a-zA-Z]+$');
-RegExp _alphanumeric = new RegExp(r'^[a-zA-Z0-9]+$');
-RegExp _numeric = new RegExp(r'^-?[0-9]+$');
-RegExp _int = new RegExp(r'^(?:-?(?:0|[1-9][0-9]*))$');
+RegExp _alpha = RegExp(r'^[a-zA-Z]+$');
+RegExp _alphanumeric = RegExp(r'^[a-zA-Z0-9]+$');
+RegExp _numeric = RegExp(r'^-?[0-9]+$');
+RegExp _int = RegExp(r'^(?:-?(?:0|[1-9][0-9]*))$');
 RegExp _float =
-    new RegExp(r'^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$');
-RegExp _hexadecimal = new RegExp(r'^[0-9a-fA-F]+$');
-RegExp _hexcolor = new RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
+   RegExp(r'^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$');
+RegExp _hexadecimal = RegExp(r'^[0-9a-fA-F]+$');
+RegExp _hexcolor = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
-RegExp _base64 = new RegExp(
+RegExp _base64 = RegExp(
     r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{4})$');
 
-RegExp _creditCard = new RegExp(
+RegExp _creditCard = RegExp(
     r'^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$');
 
-RegExp _isbn10Maybe = new RegExp(r'^(?:[0-9]{9}X|[0-9]{10})$');
-RegExp _isbn13Maybe = new RegExp(r'^(?:[0-9]{13})$');
+RegExp _isbn10Maybe = RegExp(r'^(?:[0-9]{9}X|[0-9]{10})$');
+RegExp _isbn13Maybe = RegExp(r'^(?:[0-9]{13})$');
 
 Map _uuid = {
-  '3': new RegExp(
+  '3': RegExp(
       r'^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$'),
-  '4': new RegExp(
+  '4': RegExp(
       r'^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'),
-  '5': new RegExp(
+  '5': RegExp(
       r'^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'),
-  'all': new RegExp(
+  'all': RegExp(
       r'^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$')
 };
 
-RegExp _multibyte = new RegExp(r'[^\x00-\x7F]');
-RegExp _ascii = new RegExp(r'^[\x00-\x7F]+$');
-RegExp _fullWidth = new RegExp(
+RegExp _multibyte = RegExp(r'[^\x00-\x7F]');
+RegExp _ascii = RegExp(r'^[\x00-\x7F]+$');
+RegExp _fullWidth = RegExp(
     r'[^\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
-RegExp _halfWidth = new RegExp(
+RegExp _halfWidth = RegExp(
     r'[\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
 
 /// check if the string matches the comparison
@@ -60,7 +60,7 @@ bool contains(String str, substring) {
 
 /// check if string matches the pattern.
 bool matches(String str, pattern) {
-  RegExp re = new RegExp(pattern);
+  RegExp re = RegExp(pattern);
   return re.hasMatch(str);
 }
 
@@ -121,7 +121,7 @@ bool isURL(String str, [Map options]) {
   split = str.split('#');
   str = shift(split);
   hash = split.join('#');
-  if (hash != null && hash != "" && new RegExp(r'\s').hasMatch(hash)) {
+  if (hash != null && hash != "" && RegExp(r'\s').hasMatch(hash)) {
     return false;
   }
 
@@ -129,7 +129,7 @@ bool isURL(String str, [Map options]) {
   split = str.split('?');
   str = shift(split);
   query = split.join('?');
-  if (query != null && query != "" && new RegExp(r'\s').hasMatch(query)) {
+  if (query != null && query != "" && RegExp(r'\s').hasMatch(query)) {
     return false;
   }
 
@@ -137,7 +137,7 @@ bool isURL(String str, [Map options]) {
   split = str.split('/');
   str = shift(split);
   path = split.join('/');
-  if (path != null && path != "" && new RegExp(r'\s').hasMatch(path)) {
+  if (path != null && path != "" && RegExp(r'\s').hasMatch(path)) {
     return false;
   }
 
@@ -148,11 +148,11 @@ bool isURL(String str, [Map options]) {
     if (auth.indexOf(':') >= 0) {
       auth = auth.split(':');
       user = shift(auth);
-      if (!new RegExp(r'^\S+$').hasMatch(user)) {
+      if (!RegExp(r'^\S+$').hasMatch(user)) {
         return false;
       }
       pass = auth.join(':');
-      if (!new RegExp(r'^\S*$').hasMatch(user)) {
+      if (!RegExp(r'^\S*$').hasMatch(user)) {
         return false;
       }
     }
@@ -169,7 +169,7 @@ bool isURL(String str, [Map options]) {
     } catch (e) {
       return false;
     }
-    if (!new RegExp(r'^[0-9]+$').hasMatch(port_str) ||
+    if (!RegExp(r'^[0-9]+$').hasMatch(port_str) ||
         port <= 0 ||
         port > 65535) {
       return false;
@@ -221,7 +221,7 @@ bool isFQDN(str, [options]) {
   List parts = str.split('.');
   if (options['require_tld']) {
     var tld = parts.removeLast();
-    if (parts.isEmpty || !new RegExp(r'^[a-z]{2,}$').hasMatch(tld)) {
+    if (parts.isEmpty || !RegExp(r'^[a-z]{2,}$').hasMatch(tld)) {
       return false;
     }
   }
@@ -233,7 +233,7 @@ bool isFQDN(str, [options]) {
         return false;
       }
     }
-    if (!new RegExp(r'^[a-z\\u00a1-\\uffff0-9-]+$').hasMatch(part)) {
+    if (!RegExp(r'^[a-z\\u00a1-\\uffff0-9-]+$').hasMatch(part)) {
       return false;
     }
     if (part[0] == '-' ||
@@ -353,7 +353,7 @@ bool isDate(String str) {
 /// If `date` is not passed, it defaults to now.
 bool isAfter(String str, [date]) {
   if (date == null) {
-    date = new DateTime.now();
+    date = DateTime.now();
   } else if (isDate(date)) {
     date = DateTime.parse(date);
   } else {
@@ -375,7 +375,7 @@ bool isAfter(String str, [date]) {
 /// If `date` is not passed, it defaults to now.
 bool isBefore(String str, [date]) {
   if (date == null) {
-    date = new DateTime.now();
+    date = DateTime.now();
   } else if (isDate(date)) {
     date = DateTime.parse(date);
   } else {
@@ -407,7 +407,7 @@ bool isIn(String str, values) {
 
 /// check if the string is a credit card
 bool isCreditCard(String str) {
-  String sanitized = str.replaceAll(new RegExp(r'[^0-9]+'), '');
+  String sanitized = str.replaceAll(RegExp(r'[^0-9]+'), '');
   if (!_creditCard.hasMatch(sanitized)) {
     return false;
   }
@@ -445,7 +445,7 @@ bool isISBN(String str, [version]) {
 
   version = version.toString();
 
-  String sanitized = str.replaceAll(new RegExp(r'[\s-]+'), '');
+  String sanitized = str.replaceAll(RegExp(r'[\s-]+'), '');
   int checksum = 0;
 
   if (version == '10') {
