@@ -141,7 +141,7 @@ bool isURL(String str, [Map options]) {
     return false;
   }
 
-  // check auth type urls
+  // check auth type urls 
   split = str.split('@');
   if (split.length > 1) {
     auth = shift(split);
@@ -152,7 +152,7 @@ bool isURL(String str, [Map options]) {
         return false;
       }
       pass = auth.join(':');
-      if (!RegExp(r'^\S*$').hasMatch(user)) {
+      if (!RegExp(r'^\S*$').hasMatch(pass)) {
         return false;
       }
     }

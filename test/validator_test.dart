@@ -76,6 +76,7 @@ void main() {
     expect(v.isURL('http://www.xn--froschgrn-x9a.net/'), equals(true));
     expect(v.isURL('http://xn--froschgrn-x9a.com/'), equals(true));
     expect(v.isURL('http://foo--bar.com'), equals(true));
+    expect(v.isURL('http://username:token@example.com/protected/files'), equals(true));
     // invalid
     expect(v.isURL('xyz://foobar.com'), equals(false));
     expect(v.isURL('invalid/'), equals(false));
