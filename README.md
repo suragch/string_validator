@@ -5,8 +5,6 @@ String validation and sanitization for Dart.
 
 The is a new fork of [validator.dart](https://github.com/karan/validator.dart), which was originally a port of [validator.js](https://github.com/chriso/validator.js).
 
-## Usage
-
 ## Validators
 
 - **equals(String str, comparison)** - check if the string matches the comparison.
