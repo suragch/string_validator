@@ -1,3 +1,7 @@
+## 0.1.3
+
+- added examples and a couple other minor changes not committed in the previous version
+
 ## 0.1.2
 
 - fixed code warning
