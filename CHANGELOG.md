@@ -1,3 +1,11 @@
+# Changes
+
+## 0.1.4
+
+- Bug fix for `isURL()` with `require_protocol` option.
+- Removed unnecessary `new` keyboards.
+- Applied formatting.
+
 ## 0.1.3
 
 - added examples and a couple other minor changes not committed in the previous version

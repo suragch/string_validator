@@ -76,7 +76,8 @@ void main() {
     expect(v.isURL('http://www.xn--froschgrn-x9a.net/'), equals(true));
     expect(v.isURL('http://xn--froschgrn-x9a.com/'), equals(true));
     expect(v.isURL('http://foo--bar.com'), equals(true));
-    expect(v.isURL('http://username:token@example.com/protected/files'), equals(true));
+    expect(v.isURL('http://username:token@example.com/protected/files'),
+        equals(true));
     // invalid
     expect(v.isURL('xyz://foobar.com'), equals(false));
     expect(v.isURL('invalid/'), equals(false));
@@ -343,8 +344,10 @@ void main() {
     expect(v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3', 3), equals(true));
     // invalid
     expect(v.isUUID('', 3), equals(false));
-    expect(v.isUUID('xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3', 3), equals(false));
-    expect(v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx', 3), equals(false));
+    expect(
+        v.isUUID('xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3', 3), equals(false));
+    expect(
+        v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx', 3), equals(false));
     expect(v.isUUID('A987FBC94BED3078CF079141BA07C9F3', 3), equals(false));
     expect(v.isUUID('934859', 3), equals(false));
     expect(v.isUUID('987FBC9-4BED-3078-CF07A-9141BA07C9F3', 3), equals(false));
@@ -358,8 +361,10 @@ void main() {
     expect(v.isUUID('57b73598-8764-4ad0-a76a-679bb6640eb1', 4), equals(true));
     // invalid
     expect(v.isUUID('', 4), equals(false));
-    expect(v.isUUID('xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3', 4), equals(false));
-    expect(v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx', 4), equals(false));
+    expect(
+        v.isUUID('xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3', 4), equals(false));
+    expect(
+        v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx', 4), equals(false));
     expect(v.isUUID('A987FBC94BED3078CF079141BA07C9F3', 4), equals(false));
     expect(v.isUUID('934859', 4), equals(false));
     expect(v.isUUID('987FBC9-4BED-3078-CF07A-9141BA07C9F3', 4), equals(false));
@@ -373,8 +378,10 @@ void main() {
     expect(v.isUUID('987FBC97-4BED-5078-8F07-9141BA07C9F3', 5), equals(true));
     // invalid
     expect(v.isUUID('', 5), equals(false));
-    expect(v.isUUID('xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3', 5), equals(false));
-    expect(v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx', 5), equals(false));
+    expect(
+        v.isUUID('xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3', 5), equals(false));
+    expect(
+        v.isUUID('A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx', 5), equals(false));
     expect(v.isUUID('A987FBC94BED3078CF079141BA07C9F3', 5), equals(false));
     expect(v.isUUID('934859', 5), equals(false));
     expect(v.isUUID('987FBC9-4BED-3078-CF07A-9141BA07C9F3', 5), equals(false));
@@ -421,8 +428,6 @@ void main() {
     expect(v.isAfter(' '), equals(false));
     expect(v.isAfter(''), equals(false));
   });
-
-
 
   test('string is a date before the specified date', () {
     // valid
@@ -537,8 +542,6 @@ void main() {
     expect(v.isISBN('', 13), equals(false));
   });
 
-
-
   test('string is an ISBN (version 10 or 13)', () {
     // valid
     expect(v.isISBN('9783836221191'), equals(true));
@@ -641,7 +644,8 @@ void main() {
     expect(v.isSurrogatePair('ABC1-2-3'), equals(false));
   });
 
-  test('string is a valid hex-encoded representation of a MongoDB ObjectId', () {
+  test('string is a valid hex-encoded representation of a MongoDB ObjectId',
+      () {
     // valid
     expect(v.isMongoId('507f1f77bcf86cd799439011'), equals(true));
     // invalid
@@ -649,5 +653,4 @@ void main() {
     expect(v.isMongoId('507f1f77bcf86cd7994390z'), equals(false));
     expect(v.isMongoId(''), equals(false));
   });
-
 }

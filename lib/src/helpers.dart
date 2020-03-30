@@ -11,7 +11,7 @@ shift(List l) {
 
 Map merge(Map obj, defaults) {
   if (obj == null) {
-    obj = new Map();
+    obj = Map();
   }
   defaults.forEach((key, val) => obj.putIfAbsent(key, () => val));
   return obj;
