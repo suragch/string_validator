@@ -112,7 +112,7 @@ bool isURL(String str, [Map options]) {
     if (options['protocols'].indexOf(protocol) == -1) {
       return false;
     }
-  } else if (options['require_protocols'] == true) {
+  } else if (options['require_protocol'] == true) {
     return false;
   }
   str = split.join('://');
