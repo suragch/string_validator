@@ -2,6 +2,22 @@ import "package:test/test.dart";
 import 'package:string_validator/string_validator.dart' as v;
 
 void main() {
+  group('Person name validator', () {
+    test('Should be valid cases', () {
+      expect(v.isPersonName('Lucas Batista'), equals(true));
+      expect(v.isPersonName('João dos Santos'), equals(true));
+      expect(v.isPersonName('Jackson Müller'), equals(true));
+      expect(v.isPersonName("Paul O'Neil"), equals(true));
+    });
+    test('Should be invalid cases', () {
+      expect(v.isPersonName(''), equals(false));
+      expect(v.isPersonName('João'), equals(false));
+      expect(v.isPersonName('Y'), equals(false));
+      expect(v.isPersonName('123 456'), equals(false));
+      expect(v.isPersonName('Luc?s Batista'), equals(false));
+    });
+  });
+
   test('strings are equal', () {
     // valid
     expect(v.equals('abc', 'abc'), equals(true));
