@@ -7,6 +7,7 @@ The is a new fork of [validator.dart](https://github.com/karan/validator.dart), 
 
 ## Validators
 
+- **isPersonName(String str)** - check if the string is a person name (first and last name required, accents allowed).
 - **equals(String str, comparison)** - check if the string matches the comparison.
 - **contains(String str, seed)** - check if the string contains the seed.
 - **matches(String str, pattern)** - check if string matches the pattern. `matches('foobar', 'foo')`.
