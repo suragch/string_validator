@@ -98,7 +98,7 @@ void main() {
     expect(v.isURL('http://www.foo---bar.com/'), equals(false));
     expect(v.isURL('http://www.foo_bar.com/'), equals(false));
     expect(v.isURL(''), equals(false));
-    expect(v.isURL('http://foobar.com/' + new List(2083).join('f')),
+    expect(v.isURL('http://foobar.com/' + ('f' * 2083)),
         equals(false));
     expect(v.isURL('http://*.foo.com'), equals(false));
     expect(v.isURL('*.foo.com'), equals(false));
@@ -267,15 +267,6 @@ void main() {
     expect(v.isDivisibleBy('1', '2'), equals(false));
     expect(v.isDivisibleBy('-1', '2'), equals(false));
     expect(v.isDivisibleBy('abc', '2'), equals(false));
-  });
-
-  test('string is null', () {
-    // valid
-    expect(v.isNull(null), equals(true));
-    expect(v.isNull(''), equals(true));
-    // invalid
-    expect(v.isNull(' '), equals(false));
-    expect(v.isNull('foo'), equals(false));
   });
 
   test('length at least', () {

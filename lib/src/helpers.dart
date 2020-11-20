@@ -9,9 +9,9 @@ shift(List l) {
   return null;
 }
 
-Map merge(Map obj, defaults) {
+Map<String, Object> merge(Map<String, Object>? obj, Map<String, Object> defaults) {
   if (obj == null) {
-    obj = Map();
+    return defaults;
   }
   defaults.forEach((key, val) => obj.putIfAbsent(key, () => val));
   return obj;

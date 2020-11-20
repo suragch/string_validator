@@ -11,7 +11,7 @@ The is a new fork of [validator.dart](https://github.com/karan/validator.dart), 
 - **contains(String str, seed)** - check if the string contains the seed.
 - **matches(String str, pattern)** - check if string matches the pattern. `matches('foobar', 'foo')`.
 - **isEmail(String str)** - check if the string is an email.
-- **isURL(String str [, options])** - check if the string is an URL. `options` is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, allow_underscores: false, host_whitelist: false, host_blacklist: false }`.
+- **isURL(String str [, options])** - check if the string is an URL. `options` is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, allow_underscores: false }`.
 - **isFQDN(String str [, options])** - check if the string is a fully qualified domain name (e.g. domain.com). `options` is an object which defaults to `{ require_tld: true, allow_underscores: false }`.
 - **isIP(String str [, version])** - check if the string is an IP (version 4 or 6).
 - **isAlpha(String str)** - check if the string contains only letters (a-zA-Z).
@@ -59,11 +59,3 @@ The is a new fork of [validator.dart](https://github.com/karan/validator.dart), 
 - **whitelist(String input, chars)** - remove characters that do not appear in the whitelist. The characters are used in a RegExp and so you will need to escape some chars, e.g. whitelist(String input, '\\[\\]').
 - **blacklist(String input, chars)** - remove characters that appear in the blacklist. The characters are used in a RegExp and so you will need to escape some chars, e.g. blacklist(String input, '\\[\\]').
 - **normalizeEmail(String email [, options])** - canonicalize an email address. `options` is an object which defaults to `{ lowercase: true }`. With `lowercase` set to `true`, the local part of the email address is lowercased for all domains; the hostname is always lowercased and the local part of the email address is always lowercased for hosts that are known to be case-insensitive (currently only GMail). Normalization follows special rules for known providers: currently, GMail addresses have dots removed in the local part and are stripped of tags (e.g. `some.one+tag@gmail.com` becomes `someone@gmail.com`) and all `@googlemail.com` addresses are normalized to `@gmail.com`.
-
-## Tests
-
-To test the package, run:
-
-```
-$ pub run test test/test_all.dart
-```

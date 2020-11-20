@@ -72,21 +72,17 @@ bool isEmail(String str) {
 ///
 /// `options` is a `Map` which defaults to
 /// `{ 'protocols': ['http','https','ftp'], 'require_tld': true,
-/// 'require_protocol': false, 'allow_underscores': false,
-/// 'host_whitelist': false, 'host_blacklist': false }`.
-bool isURL(String str, [Map options]) {
-  if (str == null ||
-      str.isEmpty ||
-      str.length > 2083 ||
-      str.indexOf('mailto:') == 0) {
+/// 'require_protocol': false, 'allow_underscores': false }`.
+bool isURL(String str, [Map<String, Object>? options]) {
+  if (str.isEmpty || str.length > 2083 || str.indexOf('mailto:') == 0) {
     return false;
   }
 
-  Map default_url_options = {
+  final default_url_options = {
     'protocols': ['http', 'https', 'ftp'],
     'require_tld': true,
     'require_protocol': false,
-    'allow_underscores': false
+    'allow_underscores': false,
   };
 
   options = merge(options, default_url_options);
@@ -108,7 +104,8 @@ bool isURL(String str, [Map options]) {
   split = str.split('://');
   if (split.length > 1) {
     protocol = shift(split);
-    if (options['protocols'].indexOf(protocol) == -1) {
+    final protocols = options['protocols'] as List<String>;
+    if (protocols.indexOf(protocol) == -1) {
       return false;
     }
   } else if (options['require_protocol'] == true) {
@@ -177,16 +174,6 @@ bool isURL(String str, [Map options]) {
     return false;
   }
 
-  if (options['host_whitelist'] == true &&
-      options['host_whitelist'].indexOf(host) == -1) {
-    return false;
-  }
-
-  if (options['host_blacklist'] == true &&
-      options['host_blacklist'].indexOf(host) != -1) {
-    return false;
-  }
-
   return true;
 }
 
@@ -211,12 +198,15 @@ bool isIP(String str, [version]) {
 /// check if the string is a fully qualified domain name (e.g. domain.com).
 ///
 /// `options` is a `Map` which defaults to `{ 'require_tld': true, 'allow_underscores': false }`.
-bool isFQDN(str, [options]) {
-  Map default_fqdn_options = {'require_tld': true, 'allow_underscores': false};
+bool isFQDN(String str, [Map<String, Object>? options]) {
+  final default_fqdn_options = {
+    'require_tld': true,
+    'allow_underscores': false
+  };
 
   options = merge(options, default_fqdn_options);
   List parts = str.split('.');
-  if (options['require_tld']) {
+  if (options['require_tld'] as bool) {
     var tld = parts.removeLast();
     if (parts.isEmpty || !RegExp(r'^[a-z]{2,}$').hasMatch(tld)) {
       return false;
@@ -225,7 +215,7 @@ bool isFQDN(str, [options]) {
 
   for (var part, i = 0; i < parts.length; i++) {
     part = parts[i];
-    if (options['allow_underscores']) {
+    if (options['allow_underscores'] as bool) {
       if (part.indexOf('__') >= 0) {
         return false;
       }
@@ -303,23 +293,18 @@ bool isDivisibleBy(String str, n) {
   }
 }
 
-/// check if the string is null
-bool isNull(String str) {
-  return str == null || str.isEmpty;
-}
-
 /// check if the string's length falls in a range
 /// If no max is given then any length above min is ok.
 ///
 /// Note: this function takes into account surrogate pairs.
-bool isLength(String str, int min, [int max]) {
+bool isLength(String str, int min, [int? max]) {
   List surrogatePairs = _surrogatePairsRegExp.allMatches(str).toList();
   int len = str.length - surrogatePairs.length;
   return len >= min && (max == null || len <= max);
 }
 
 /// check if the string's length (in bytes) falls in a range.
-bool isByteLength(String str, int min, [int max]) {
+bool isByteLength(String str, int min, [int? max]) {
   return str.length >= min && (max == null || str.length <= max);
 }
 
@@ -331,7 +316,7 @@ bool isUUID(String str, [version]) {
     version = version.toString();
   }
 
-  RegExp pat = _uuid[version];
+  RegExp? pat = _uuid[version];
   return (pat != null && pat.hasMatch(str.toUpperCase()));
 }
 
