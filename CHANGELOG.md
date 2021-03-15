@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.0
+
+- Null safety stable bump
+
 ## 0.2.0-nullsafety.0
 
 - Updated for null safety
