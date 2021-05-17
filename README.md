@@ -25,7 +25,6 @@ The is a new fork of [validator.dart](https://github.com/karan/validator.dart), 
 - **isInt(String str)** - check if the string is an integer.
 - **isFloat(String str)** - check if the string is a float.
 - **isDivisibleBy(String str, number)** - check if the string is a number that's divisible by another.
-- **isNull(String str)** - check if the string is null.
 - **isLength(String str, min [, max])** - check if the string's length falls in a range. Note: this function takes into account surrogate pairs.
 - **isByteLength(String str, min [, max])** - check if the string's length (in bytes) falls in a range.
 - **isUUID(String str [, version])** - check if the string is a UUID (version 3, 4 or 5).
