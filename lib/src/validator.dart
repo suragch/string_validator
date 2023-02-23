@@ -18,7 +18,7 @@ RegExp _int = RegExp(r'^(?:-?(?:0|[1-9][0-9]*))$');
 RegExp _float =
     RegExp(r'^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$');
 RegExp _hexadecimal = RegExp(r'^[0-9a-fA-F]+$');
-RegExp _hexcolor = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
+RegExp _hexColor = RegExp(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
 RegExp _base64 = RegExp(
     r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{4})$');
@@ -29,7 +29,7 @@ RegExp _creditCard = RegExp(
 RegExp _isbn10Maybe = RegExp(r'^(?:[0-9]{9}X|[0-9]{10})$');
 RegExp _isbn13Maybe = RegExp(r'^(?:[0-9]{13})$');
 
-Map _uuid = {
+Map<String, RegExp> _uuid = {
   '3': RegExp(
       r'^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$'),
   '4': RegExp(
@@ -48,17 +48,17 @@ RegExp _halfWidth =
     RegExp(r'[\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]');
 
 /// check if the string matches the comparison
-bool equals(String str, comparison) {
+bool equals(String str, Object? comparison) {
   return str == comparison.toString();
 }
 
 /// check if the string contains the substring
-bool contains(String str, substring) {
+bool contains(String str, String substring) {
   return str.contains(substring);
 }
 
 /// check if string matches the pattern.
-bool matches(String str, pattern) {
+bool matches(String str, String pattern) {
   RegExp re = RegExp(pattern);
   return re.hasMatch(str);
 }
@@ -73,39 +73,43 @@ bool isEmail(String str) {
 /// `options` is a `Map` which defaults to
 /// `{ 'protocols': ['http','https','ftp'], 'require_tld': true,
 /// 'require_protocol': false, 'allow_underscores': false }`.
-bool isURL(String str, [Map<String, Object>? options]) {
-  if (str.isEmpty || str.length > 2083 || str.indexOf('mailto:') == 0) {
+bool isURL(String? input, [Map<String, Object>? options]) {
+  var str = input;
+  if (str == null ||
+      str.isEmpty ||
+      str.length > 2083 ||
+      str.indexOf('mailto:') == 0) {
     return false;
   }
 
-  final default_url_options = {
+  final defaultUrlOptions = {
     'protocols': ['http', 'https', 'ftp'],
     'require_tld': true,
     'require_protocol': false,
     'allow_underscores': false,
   };
 
-  options = merge(options, default_url_options);
+  options = merge(options, defaultUrlOptions);
 
-  var protocol,
-      user,
-      pass,
-      auth,
-      host,
-      hostname,
-      port,
-      port_str,
-      path,
-      query,
-      hash,
-      split;
+  // String? protocol;
+  // String user;
+  // String pass;
+  // // String auth;
+  // String host;
+  // String hostname;
+  // String port;
+  // String portStr;
+  // String path;
+  // String query;
+  // String hash;
+  // List<String> split;
 
   // check protocol
-  split = str.split('://');
+  var split = str.split('://');
   if (split.length > 1) {
-    protocol = shift(split);
+    final protocol = shift(split);
     final protocols = options['protocols'] as List<String>;
-    if (protocols.indexOf(protocol) == -1) {
+    if (!protocols.contains(protocol)) {
       return false;
     }
   } else if (options['require_protocol'] == true) {
@@ -116,38 +120,39 @@ bool isURL(String str, [Map<String, Object>? options]) {
   // check hash
   split = str.split('#');
   str = shift(split);
-  hash = split.join('#');
-  if (hash != null && hash != "" && RegExp(r'\s').hasMatch(hash)) {
+  final hash = split.join('#');
+  if (hash.isNotEmpty && RegExp(r'\s').hasMatch(hash)) {
     return false;
   }
 
   // check query params
-  split = str.split('?');
+  split = str?.split('?') ?? [];
   str = shift(split);
-  query = split.join('?');
-  if (query != null && query != "" && RegExp(r'\s').hasMatch(query)) {
+  final query = split.join('?');
+  if (query != "" && RegExp(r'\s').hasMatch(query)) {
     return false;
   }
 
   // check path
-  split = str.split('/');
+  split = str?.split('/') ?? [];
   str = shift(split);
-  path = split.join('/');
-  if (path != null && path != "" && RegExp(r'\s').hasMatch(path)) {
+  final path = split.join('/');
+  if (path != "" && RegExp(r'\s').hasMatch(path)) {
     return false;
   }
 
   // check auth type urls
-  split = str.split('@');
+  split = str?.split('@') ?? [];
   if (split.length > 1) {
-    auth = shift(split);
-    if (auth.indexOf(':') >= 0) {
-      auth = auth.split(':');
-      user = shift(auth);
-      if (!RegExp(r'^\S+$').hasMatch(user)) {
+    final auth = shift(split);
+    if (auth != null && auth.contains(':')) {
+      // final auth = auth.split(':');
+      final parts = auth.split(':');
+      final user = shift(parts);
+      if (user == null || !RegExp(r'^\S+$').hasMatch(user)) {
         return false;
       }
-      pass = auth.join(':');
+      final pass = parts.join(':');
       if (!RegExp(r'^\S*$').hasMatch(pass)) {
         return false;
       }
@@ -155,22 +160,22 @@ bool isURL(String str, [Map<String, Object>? options]) {
   }
 
   // check hostname
-  hostname = split.join('@');
+  final hostname = split.join('@');
   split = hostname.split(':');
-  host = shift(split);
-  if (split.length > 0) {
-    port_str = split.join(':');
-    try {
-      port = int.parse(port_str, radix: 10);
-    } catch (e) {
-      return false;
-    }
-    if (!RegExp(r'^[0-9]+$').hasMatch(port_str) || port <= 0 || port > 65535) {
+  final host = shift(split);
+  if (split.isNotEmpty) {
+    final portStr = split.join(':');
+    final port = int.tryParse(portStr, radix: 10);
+    if (!RegExp(r'^[0-9]+$').hasMatch(portStr) ||
+        port == null ||
+        port <= 0 ||
+        port > 65535) {
       return false;
     }
   }
 
-  if (!isIP(host) && !isFQDN(host, options) && host != 'localhost') {
+  if (host == null ||
+      !isIP(host) && !isFQDN(host, options) && host != 'localhost') {
     return false;
   }
 
@@ -180,7 +185,8 @@ bool isURL(String str, [Map<String, Object>? options]) {
 /// check if the string is an IP (version 4 or 6)
 ///
 /// `version` is a String or an `int`.
-bool isIP(String str, [version]) {
+bool isIP(String str, [Object? version]) {
+  assert(version == null || version is String || version is int);
   version = version.toString();
   if (version == 'null') {
     return isIP(str, 4) || isIP(str, 6);
@@ -199,13 +205,10 @@ bool isIP(String str, [version]) {
 ///
 /// `options` is a `Map` which defaults to `{ 'require_tld': true, 'allow_underscores': false }`.
 bool isFQDN(String str, [Map<String, Object>? options]) {
-  final default_fqdn_options = {
-    'require_tld': true,
-    'allow_underscores': false
-  };
+  final defaultFqdnOptions = {'require_tld': true, 'allow_underscores': false};
 
-  options = merge(options, default_fqdn_options);
-  List parts = str.split('.');
+  options = merge(options, defaultFqdnOptions);
+  final parts = str.split('.');
   if (options['require_tld'] as bool) {
     var tld = parts.removeLast();
     if (parts.isEmpty || !RegExp(r'^[a-z]{2,}$').hasMatch(tld)) {
@@ -213,10 +216,9 @@ bool isFQDN(String str, [Map<String, Object>? options]) {
     }
   }
 
-  for (var part, i = 0; i < parts.length; i++) {
-    part = parts[i];
+  for (final part in parts) {
     if (options['allow_underscores'] as bool) {
-      if (part.indexOf('__') >= 0) {
+      if (part.contains('__')) {
         return false;
       }
     }
@@ -225,7 +227,7 @@ bool isFQDN(String str, [Map<String, Object>? options]) {
     }
     if (part[0] == '-' ||
         part[part.length - 1] == '-' ||
-        part.indexOf('---') >= 0) {
+        part.contains('---')) {
       return false;
     }
   }
@@ -269,7 +271,7 @@ bool isHexadecimal(String str) {
 
 /// check if the string is a hexadecimal color
 bool isHexColor(String str) {
-  return _hexcolor.hasMatch(str);
+  return _hexColor.hasMatch(str);
 }
 
 /// check if the string is lowercase
@@ -285,9 +287,19 @@ bool isUppercase(String str) {
 /// check if the string is a number that's divisible by another
 ///
 /// [n] is a String or an int.
-bool isDivisibleBy(String str, n) {
+bool isDivisibleBy(String str, Object n) {
+  assert(n is String || n is int);
+  final int? number;
+  if (n is int) {
+    number = n;
+  } else if (n is String) {
+    number = int.tryParse(n);
+  } else {
+    return false;
+  }
+  if (number == null) return false;
   try {
-    return double.parse(str) % int.parse(n) == 0;
+    return double.parse(str) % number == 0;
   } catch (e) {
     return false;
   }
@@ -309,7 +321,7 @@ bool isByteLength(String str, int min, [int? max]) {
 }
 
 /// check if the string is a UUID (version 3, 4 or 5).
-bool isUUID(String str, [version]) {
+bool isUUID(String str, [Object? version]) {
   if (version == null) {
     version = 'all';
   } else {
@@ -322,69 +334,58 @@ bool isUUID(String str, [version]) {
 
 /// check if the string is a date
 bool isDate(String str) {
-  try {
-    DateTime.parse(str);
-    return true;
-  } catch (e) {
-    return false;
-  }
+  return DateTime.tryParse(str) != null;
 }
 
 /// check if the string is a date that's after the specified date
 ///
 /// If `date` is not passed, it defaults to now.
-bool isAfter(String str, [date]) {
+bool isAfter(String str, [String? date]) {
+  DateTime referenceDate;
   if (date == null) {
-    date = DateTime.now();
+    referenceDate = DateTime.now();
   } else if (isDate(date)) {
-    date = DateTime.parse(date);
+    referenceDate = DateTime.parse(date);
   } else {
     return false;
   }
 
-  DateTime str_date;
-  try {
-    str_date = DateTime.parse(str);
-  } catch (e) {
-    return false;
-  }
+  final strDate = DateTime.tryParse(str);
+  if (strDate == null) return false;
 
-  return str_date.isAfter(date);
+  return strDate.isAfter(referenceDate);
 }
 
 /// check if the string is a date that's before the specified date
 ///
 /// If `date` is not passed, it defaults to now.
-bool isBefore(String str, [date]) {
+bool isBefore(String str, [String? date]) {
+  DateTime referenceDate;
   if (date == null) {
-    date = DateTime.now();
+    referenceDate = DateTime.now();
   } else if (isDate(date)) {
-    date = DateTime.parse(date);
+    referenceDate = DateTime.parse(date);
   } else {
     return false;
   }
 
-  DateTime str_date;
-  try {
-    str_date = DateTime.parse(str);
-  } catch (e) {
-    return false;
-  }
+  final strDate = DateTime.tryParse(str);
+  if (strDate == null) return false;
 
-  return str_date.isBefore(date);
+  return strDate.isBefore(referenceDate);
 }
 
 /// check if the string is in an array of allowed values
-bool isIn(String str, values) {
-  if (values == null || values.length == 0) {
-    return false;
+bool isIn(String str, Object? values) {
+  if (values == null) return false;
+  if (values is String) {
+    return values.contains(str);
   }
-
-  if (values is List) {
-    values = values.map((e) => e.toString()).toList();
+  if (values is! Iterable) return false;
+  for (Object? value in values) {
+    if (value.toString() == str) return true;
   }
-
-  return values.indexOf(str) >= 0;
+  return false;
 }
 
 /// check if the string is a credit card
@@ -420,7 +421,7 @@ bool isCreditCard(String str) {
 }
 
 /// check if the string is an ISBN (version 10 or 13)
-bool isISBN(String str, [version]) {
+bool isISBN(String str, [Object? version]) {
   if (version == null) {
     return isISBN(str, '10') || isISBN(str, '13');
   }
@@ -458,7 +459,7 @@ bool isISBN(String str, [version]) {
 }
 
 /// check if the string is valid JSON
-bool isJson(str) {
+bool isJson(String str) {
   try {
     json.decode(str);
   } catch (e) {

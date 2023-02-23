@@ -1,5 +1,11 @@
 # Changes
 
+## 1.0.0
+
+- Seems to have been stable for a long time so bumping to 1.0.0.
+- Fixed analyzer warnings.
+- Added type safety.
+
 ## 0.3.0
 
 - Null safety stable bump

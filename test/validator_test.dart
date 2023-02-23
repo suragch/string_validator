@@ -98,8 +98,7 @@ void main() {
     expect(v.isURL('http://www.foo---bar.com/'), equals(false));
     expect(v.isURL('http://www.foo_bar.com/'), equals(false));
     expect(v.isURL(''), equals(false));
-    expect(v.isURL('http://foobar.com/' + ('f' * 2083)),
-        equals(false));
+    expect(v.isURL('http://foobar.com/${'f' * 2083}'), equals(false));
     expect(v.isURL('http://*.foo.com'), equals(false));
     expect(v.isURL('*.foo.com'), equals(false));
     expect(v.isURL('!.foo.com'), equals(false));
@@ -169,13 +168,8 @@ void main() {
         equals(true));
     expect(v.isBase64('U3VzcGVuZGlzc2UgbGVjdHVzIGxlbw=='), equals(true));
     expect(
-        v.isBase64('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuMPNS1Ufof9EW/M98FNw' +
-            'UAKrwflsqVxaxQjBQnHQmiI7Vac40t8x7pIb8gLGV6wL7sBTJiPovJ0V7y7oc0Ye' +
-            'rhKh0Rm4skP2z/jHwwZICgGzBvA0rH8xlhUiTvcwDCJ0kc+fh35hNt8srZQM4619' +
-            'FTgB66Xmp4EtVyhpQV+t02g6NzK72oZI0vnAvqhpkxLeLiMCyrI416wHm5Tkukhx' +
-            'QmcL2a6hNOyu0ixX/x2kSFXApEnVrJ+/IxGyfyw8kf4N2IZpW5nEP847lpfj0SZZ' +
-            'Fwrd1mnfnDbYohX2zRptLy2ZUn06Qo9pkG5ntvFEPo9bfZeULtjYzIl6K8gJ2uGZ' +
-            'HQIDAQAB'),
+        v.isBase64(
+            'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuMPNS1Ufof9EW/M98FNwUAKrwflsqVxaxQjBQnHQmiI7Vac40t8x7pIb8gLGV6wL7sBTJiPovJ0V7y7oc0YerhKh0Rm4skP2z/jHwwZICgGzBvA0rH8xlhUiTvcwDCJ0kc+fh35hNt8srZQM4619FTgB66Xmp4EtVyhpQV+t02g6NzK72oZI0vnAvqhpkxLeLiMCyrI416wHm5TkukhxQmcL2a6hNOyu0ixX/x2kSFXApEnVrJ+/IxGyfyw8kf4N2IZpW5nEP847lpfj0SZZFwrd1mnfnDbYohX2zRptLy2ZUn06Qo9pkG5ntvFEPo9bfZeULtjYzIl6K8gJ2uGZHQIDAQAB'),
         equals(true));
     // invalid
     expect(v.isBase64('abc!'), equals(false));

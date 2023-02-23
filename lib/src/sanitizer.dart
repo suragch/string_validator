@@ -1,10 +1,10 @@
 import 'helpers.dart';
 import 'validator.dart';
 
-Map<String, Object> _default_normalize_email_options = {'lowercase': true};
+Map<String, Object> _defaultNormalizeEmailOptions = {'lowercase': true};
 
 /// convert the input to a string
-String toString(input) {
+String toString(Object? input) {
   if (input == null || (input is List && input.isEmpty)) {
     input = '';
   }
@@ -82,7 +82,7 @@ String rtrim(String str, [String? chars]) {
 /// The characters are used in a RegExp and so you will need to escape
 /// some chars.
 String whitelist(String str, String chars) {
-  return str.replaceAll(RegExp('[^' + chars + ']+'), '');
+  return str.replaceAll(RegExp('[^$chars]+'), '');
 }
 
 /// remove characters that appear in the blacklist.
@@ -90,17 +90,16 @@ String whitelist(String str, String chars) {
 /// The characters are used in a RegExp and so you will need to escape
 /// some chars.
 String blacklist(String str, String chars) {
-  return str.replaceAll(RegExp('[' + chars + ']+'), '');
+  return str.replaceAll(RegExp('[$chars]+'), '');
 }
 
 /// remove characters with a numerical value < 32 and 127.
 ///
 /// If `keep_new_lines` is `true`, newline characters are preserved
 /// `(\n and \r, hex 0xA and 0xD)`.
-String stripLow(String str, [bool keep_new_lines = false]) {
-  String chars = keep_new_lines == true
-      ? '\x00-\x09\x0B\x0C\x0E-\x1F\x7F'
-      : '\x00-\x1F\x7F';
+String stripLow(String str, [bool keepNewLines = false]) {
+  String chars =
+      keepNewLines == true ? '\x00-\x09\x0B\x0C\x0E-\x1F\x7F' : '\x00-\x1F\x7F';
   return blacklist(str, chars);
 }
 
@@ -126,7 +125,7 @@ String escape(String str) {
 /// tags (e.g. `some.one+tag@gmail.com` becomes `someone@gmail.com`) and all
 /// `@googlemail.com` addresses are normalized to `@gmail.com`.
 String normalizeEmail(String email, [Map<String, Object>? options]) {
-  options = merge(options, _default_normalize_email_options);
+  options = merge(options, _defaultNormalizeEmailOptions);
   if (isEmail(email) == false) {
     return '';
   }
@@ -142,7 +141,7 @@ String normalizeEmail(String email, [Map<String, Object>? options]) {
     if (options['lowercase'] == false) {
       parts[0] = parts[0].toLowerCase();
     }
-    parts[0] = parts[0].replaceAll('\.', '').split('+')[0];
+    parts[0] = parts[0].replaceAll('.', '').split('+')[0];
     parts[1] = 'gmail.com';
   }
   return parts.join('@');

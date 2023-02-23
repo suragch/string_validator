@@ -1,15 +1,14 @@
 // Helper functions for validator and sanitizer.
 
-shift(List l) {
-  if (l.isNotEmpty) {
-    var first = l.first;
-    l.removeAt(0);
-    return first;
-  }
-  return null;
+String? shift(List<String> elements) {
+  if (elements.isEmpty) return null;
+  return elements.removeAt(0);
 }
 
-Map<String, Object> merge(Map<String, Object>? obj, Map<String, Object> defaults) {
+Map<String, Object> merge(
+  Map<String, Object>? obj,
+  Map<String, Object> defaults,
+) {
   if (obj == null) {
     return defaults;
   }
