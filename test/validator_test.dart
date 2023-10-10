@@ -8,6 +8,7 @@ void main() {
     // invalid
     expect(v.equals('abc', 'Abc'), equals(false));
     expect(v.equals('abc', '123'), equals(false));
+    expect(v.equals('abc', null), equals(false));
   });
 
   test('strings contains substring', () {
