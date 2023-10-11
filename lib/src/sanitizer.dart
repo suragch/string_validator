@@ -130,7 +130,7 @@ String normalizeEmail(String email, [Map<String, Object>? options]) {
     return '';
   }
 
-  List parts = email.split('@');
+  final parts = email.split('@');
   parts[1] = parts[1].toLowerCase();
 
   if (options['lowercase'] == true) {

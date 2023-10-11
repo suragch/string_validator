@@ -317,7 +317,7 @@ bool isDivisibleBy(String str, Object n) {
 ///
 /// Note: this function takes into account surrogate pairs.
 bool isLength(String str, int min, [int? max]) {
-  List surrogatePairs = _surrogatePairsRegExp.allMatches(str).toList();
+  final surrogatePairs = _surrogatePairsRegExp.allMatches(str).toList();
   int len = str.length - surrogatePairs.length;
   return len >= min && (max == null || len <= max);
 }

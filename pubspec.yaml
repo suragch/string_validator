@@ -1,5 +1,5 @@
 name: string_validator
-version: 1.0.0
+version: 1.0.1
 description: Dart library for validating and sanitizing strings, especially
   those from user input.
 homepage: https://github.com/suragch/string_validator
