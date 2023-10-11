@@ -49,6 +49,13 @@ RegExp _halfWidth =
 
 /// check if the string matches the comparison
 bool equals(String str, Object? comparison) {
+  if (comparison == null) {
+    // Explicitly check if `comparison` is null because calling `toString`
+    // on `null` will return 'null'. This is an issue when comparing to
+    // the string 'null'. Also, `str` will never be null so if `comparison`
+    // is null we can simply return false.
+    return false;
+  }
   return str == comparison.toString();
 }
 
