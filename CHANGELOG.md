@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.1
+
+- Added null check for `equals` (#4 - @ScottAtRedHawk)
+
 ## 1.0.0
 
 - Seems to have been stable for a long time so bumping to 1.0.0.
