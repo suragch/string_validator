@@ -3,7 +3,7 @@ string_validator
 
 String validation and sanitization for Dart.
 
-The is a new fork of [validator.dart](https://github.com/karan/validator.dart), which was originally a port of [validator.js](https://github.com/chriso/validator.js).
+This is a new fork of [validator.dart](https://github.com/karan/validator.dart), which was originally a port of [validator.js](https://github.com/chriso/validator.js).
 
 ## Validators
 

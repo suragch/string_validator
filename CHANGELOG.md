@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.2
+
+- Fix documentation typo.
+
 ## 1.0.1
 
 - Added null check for `equals` (#4 - @ScottAtRedHawk)
