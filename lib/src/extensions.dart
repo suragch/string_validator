@@ -1,6 +1,7 @@
 import 'validator.dart' as v;
+import 'helpers.dart';
 
-extension ValdatorExtension on String {
+extension ValdatorExtensions on String {
   /// check if the string matches the comparison
   bool equals(Object? comparison) => v.equals(this, comparison);
 
@@ -66,7 +67,7 @@ extension ValdatorExtension on String {
   /// If no max is given then any length above min is ok.
   ///
   /// Note: this function takes into account surrogate pairs.
-  bool isLength(int min, [int? max]) => v.isLength(this, min);
+  bool isLength(int min, [int? max]) => v.isLength(this, min, max);
 
   /// check if the string's length (in bytes) falls in a range.
   bool isByteLength(int min, [int? max]) => v.isByteLength(this, min, max);
@@ -119,4 +120,88 @@ extension ValdatorExtension on String {
 
   /// check if the string is a valid hex-encoded representation of a MongoDB ObjectId
   bool isMongoId() => v.isMongoId(this);
+}
+
+extension SanitizerExtensions on String {
+  /// Converts the string to a [DateTime] object. Returns null if parsing fails.
+  DateTime? toDate() => DateTime.tryParse(this);
+
+  /// Converts the string to a [double]. Returns NaN if parsing fails.
+  double toFloat() => double.tryParse(this) ?? double.nan;
+
+  /// Converts the string to a [double]. Returns NaN if parsing fails.
+  double toDouble() => toFloat();
+
+  /// Converts the string to a [num]. [radix] is the base for integer parsing.
+  num toInt({int radix = 10}) =>
+      int.tryParse(this, radix: radix) ??
+      double.tryParse(this)?.toInt() ??
+      double.nan;
+
+  /// Converts the string to a [bool]. [strict] mode only allows '1' and 'true' to return true.
+  bool toBoolean([bool strict = false]) => strict == true
+      ? this == '1' || this == 'true'
+      : this != '0' && this != 'false' && isNotEmpty;
+
+  // /// Trims characters from both sides of the string.
+  // String trim([String? chars]) => (chars != null)
+  //     ? replaceAll(RegExp('^[$chars]+|[$chars]+\$'), '')
+  //     : replaceAll(RegExp(r'^\s+|\s+$'), '');
+
+  /// Trims characters from the left side of the string.
+  String ltrim([String? chars]) => (chars != null)
+      ? replaceAll(RegExp('^[$chars]+'), '')
+      : replaceAll(RegExp(r'^\s+'), '');
+
+  /// Trims characters from the right side of the string.
+  String rtrim([String? chars]) => (chars != null)
+      ? replaceAll(RegExp('[$chars]+\$'), '')
+      : replaceAll(RegExp(r'\s+$'), '');
+
+  /// Removes characters that do not appear in the whitelist.
+  String whitelist(String chars) => replaceAll(RegExp('[^$chars]+'), '');
+
+  /// Removes characters that appear in the blacklist.
+  String blacklist(String chars) => replaceAll(RegExp('[$chars]+'), '');
+
+  /// Removes characters with a numerical value less than 32 and 127.
+  /// If [keepNewLines] is true, newline characters are preserved (\n and \r, hex 0xA and 0xD).
+  String stripLow([bool keepNewLines = false]) {
+    final chars = keepNewLines == true
+        ? '\x00-\x09\x0B\x0C\x0E-\x1F\x7F'
+        : '\x00-\x1F\x7F';
+    return blacklist(chars);
+  }
+
+  /// Replaces HTML entities <, >, &, ', and " with their respective HTML entities.
+  String escape() => replaceAll(RegExp(r'&'), '&amp;')
+      .replaceAll(RegExp(r'"'), '&quot;')
+      .replaceAll(RegExp(r"'"), '&#x27;')
+      .replaceAll(RegExp(r'<'), '&lt;')
+      .replaceAll(RegExp(r'>'), '&gt;');
+
+  /// Canonicalizes an email address. Options include lowercase and specific provider rules.
+  String normalizeEmail([Map<String, Object>? options]) {
+    Map<String, Object> defaultNormalizeEmailOptions = {'lowercase': true};
+    options = merge(options, defaultNormalizeEmailOptions);
+    if (isEmail() == false) {
+      return '';
+    }
+
+    final parts = split('@');
+    parts[1] = parts[1].toLowerCase();
+
+    if (options['lowercase'] == true) {
+      parts[0] = parts[0].toLowerCase();
+    }
+
+    if (parts[1] == 'gmail.com' || parts[1] == 'googlemail.com') {
+      if (options['lowercase'] == false) {
+        parts[0] = parts[0].toLowerCase();
+      }
+      parts[0] = parts[0].replaceAll('.', '').split('+')[0];
+      parts[1] = 'gmail.com';
+    }
+    return parts.join('@');
+  }
 }
