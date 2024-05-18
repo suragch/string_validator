@@ -143,11 +143,6 @@ extension SanitizerExtensions on String {
       ? this == '1' || this == 'true'
       : this != '0' && this != 'false' && isNotEmpty;
 
-  // /// Trims characters from both sides of the string.
-  // String trim([String? chars]) => (chars != null)
-  //     ? replaceAll(RegExp('^[$chars]+|[$chars]+\$'), '')
-  //     : replaceAll(RegExp(r'^\s+|\s+$'), '');
-
   /// Trims characters from the left side of the string.
   String ltrim([String? chars]) => (chars != null)
       ? replaceAll(RegExp('^[$chars]+'), '')

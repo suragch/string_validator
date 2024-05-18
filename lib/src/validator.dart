@@ -98,19 +98,6 @@ bool isURL(String? input, [Map<String, Object>? options]) {
 
   options = merge(options, defaultUrlOptions);
 
-  // String? protocol;
-  // String user;
-  // String pass;
-  // // String auth;
-  // String host;
-  // String hostname;
-  // String port;
-  // String portStr;
-  // String path;
-  // String query;
-  // String hash;
-  // List<String> split;
-
   // check protocol
   var split = str.split('://');
   if (split.length > 1) {

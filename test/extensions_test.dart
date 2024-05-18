@@ -165,8 +165,8 @@ void main() {
         'TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4='
             .isBase64,
         equals(true));
-    expect('Vml2YW11cyBmZXJtZW50dW0gc2VtcGVyIHBvcnRhLg=='.isBase64,
-        equals(true));
+    expect(
+        'Vml2YW11cyBmZXJtZW50dW0gc2VtcGVyIHBvcnRhLg=='.isBase64, equals(true));
     expect('U3VzcGVuZGlzc2UgbGVjdHVzIGxlbw=='.isBase64, equals(true));
     expect(
         'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuMPNS1Ufof9EW/M98FNwUAKrwflsqVxaxQjBQnHQmiI7Vac40t8x7pIb8gLGV6wL7sBTJiPovJ0V7y7oc0YerhKh0Rm4skP2z/jHwwZICgGzBvA0rH8xlhUiTvcwDCJ0kc+fh35hNt8srZQM4619FTgB66Xmp4EtVyhpQV+t02g6NzK72oZI0vnAvqhpkxLeLiMCyrI416wHm5TkukhxQmcL2a6hNOyu0ixX/x2kSFXApEnVrJ+/IxGyfyw8kf4N2IZpW5nEP847lpfj0SZZFwrd1mnfnDbYohX2zRptLy2ZUn06Qo9pkG5ntvFEPo9bfZeULtjYzIl6K8gJ2uGZHQIDAQAB'
@@ -634,7 +634,6 @@ void main() {
     expect('507f1f77bcf86cd799439011#'.isMongoId, equals(false));
   });
 
-
   test('convert the input to a date, or null if the input is not a date', () {
     expect('2012-02-27 13:27:00'.toDate(),
         equals(DateTime.parse('2012-02-27 13:27:00')));
@@ -683,10 +682,6 @@ void main() {
     expect('  \r\n\tfoo  \r\n\t   '.trim(), equals('foo'));
     expect('  \r\n\tfoo  \r\n\t   '.trim(), equals('foo'));
   });
-
-  // test('trim characters from both sides of the input', () {
-  //   expect('010100201000'.trim('01'), equals('2'));
-  // });
 
   test('trim whitespace from the left side of the input', () {
     expect('  \r\n\tfoo  \r\n\t   '.ltrim(), equals('foo  \r\n\t   '));

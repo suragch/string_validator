@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.0
+
+- Add extension methods (#5) (@plokmij)
+
 ## 1.0.2
 
 - Fix documentation typo.
