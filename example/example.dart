@@ -19,7 +19,7 @@ void main() {
   print(isValid);
 
   userInput = 'me@example.com';
-  isValid = userInput.isEmail(); // true
+  isValid = userInput.isEmail; // true
   print(isValid);
 
   userInput = 'password1';

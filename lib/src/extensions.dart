@@ -1,7 +1,7 @@
 import 'validator.dart' as v;
 import 'helpers.dart';
 
-extension ValdatorExtensions on String {
+extension ValidatorExtensions on String {
   /// check if the string matches the comparison
   bool equals(Object? comparison) => v.equals(this, comparison);
 
@@ -9,7 +9,7 @@ extension ValdatorExtensions on String {
   bool matches(String pattern) => v.matches(this, pattern);
 
   /// check if the string is an email
-  bool isEmail() => v.isEmail(this);
+  bool get isEmail => v.isEmail(this);
 
   /// check if the string is a URL
   ///
@@ -29,34 +29,34 @@ extension ValdatorExtensions on String {
   bool isFQDN([Map<String, Object>? options]) => v.isFQDN(this, options);
 
   /// check if the string contains only letters (a-zA-Z).
-  bool isAlpha() => v.isAlpha(this);
+  bool get isAlpha => v.isAlpha(this);
 
   /// check if the string contains only numbers
-  bool isNumeric() => v.isNumeric(this);
+  bool get isNumeric => v.isNumeric(this);
 
   /// check if the string contains only letters and numbers
-  bool isAlphanumeric() => v.isAlphanumeric(this);
+  bool get isAlphanumeric => v.isAlphanumeric(this);
 
   /// check if a string is base64 encoded
-  bool isBase64() => v.isBase64(this);
+  bool get isBase64 => v.isBase64(this);
 
   /// check if the string is an integer
-  bool isInt() => v.isInt(this);
+  bool get isInt => v.isInt(this);
 
   /// check if the string is a float
-  bool isFloat() => v.isFloat(this);
+  bool get isFloat => v.isFloat(this);
 
   /// check if the string is a hexadecimal number
-  bool isHexadecimal() => v.isHexadecimal(this);
+  bool get isHexadecimal => v.isHexadecimal(this);
 
   /// check if the string is a hexadecimal color
-  bool isHexColor() => v.isHexColor(this);
+  bool get isHexColor => v.isHexColor(this);
 
   /// check if the string is lowercase
-  bool isLowercase() => v.isLowercase(this);
+  bool get isLowercase => v.isLowercase(this);
 
   /// check if the string is uppercase
-  bool isUppercase() => v.isUppercase(this);
+  bool get isUppercase => v.isUppercase(this);
 
   /// check if the string is a number that's divisible by another
   ///
@@ -76,7 +76,7 @@ extension ValdatorExtensions on String {
   bool isUUID([Object? version]) => v.isUUID(this, version);
 
   /// check if the string is a date
-  bool isDate() => v.isDate(this);
+  bool get isDate => v.isDate(this);
 
   /// check if the string is a date that's after the specified date
   ///
@@ -92,34 +92,34 @@ extension ValdatorExtensions on String {
   bool isIn(Object? values) => v.isIn(this, values);
 
   /// check if the string is a credit card
-  bool isCreditCard() => v.isCreditCard(this);
+  bool get isCreditCard => v.isCreditCard(this);
 
   /// check if the string is an ISBN (version 10 or 13)
   bool isISBN([Object? version]) => v.isISBN(this, version);
 
   /// check if the string is valid JSON
-  bool isJson() => v.isJson(this);
+  bool get isJson => v.isJson(this);
 
   /// check if the string contains one or more multibyte chars
-  bool isMultibyte() => v.isMultibyte(this);
+  bool get isMultibyte => v.isMultibyte(this);
 
   /// check if the string contains ASCII chars only
-  bool isAscii() => v.isAscii(this);
+  bool get isAscii => v.isAscii(this);
 
   /// check if the string contains any full-width chars
-  bool isFullWidth() => v.isFullWidth(this);
+  bool get isFullWidth => v.isFullWidth(this);
 
   /// check if the string contains any half-width chars
-  bool isHalfWidth() => v.isHalfWidth(this);
+  bool get isHalfWidth => v.isHalfWidth(this);
 
   /// check if the string contains a mixture of full and half-width chars
-  bool isVariableWidth() => v.isVariableWidth(this);
+  bool get isVariableWidth => v.isVariableWidth(this);
 
   /// check if the string contains any surrogate pairs chars
-  bool isSurrogatePair() => v.isSurrogatePair(this);
+  bool get isSurrogatePair => v.isSurrogatePair(this);
 
   /// check if the string is a valid hex-encoded representation of a MongoDB ObjectId
-  bool isMongoId() => v.isMongoId(this);
+  bool get isMongoId => v.isMongoId(this);
 }
 
 extension SanitizerExtensions on String {
@@ -184,7 +184,7 @@ extension SanitizerExtensions on String {
   String normalizeEmail([Map<String, Object>? options]) {
     Map<String, Object> defaultNormalizeEmailOptions = {'lowercase': true};
     options = merge(options, defaultNormalizeEmailOptions);
-    if (isEmail() == false) {
+    if (isEmail == false) {
       return '';
     }
 

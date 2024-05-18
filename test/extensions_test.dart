@@ -33,22 +33,22 @@ void main() {
 
   test('strings is email', () {
     // valid
-    expect('foo@bar.com'.isEmail(), equals(true));
-    expect('x@x.x'.isEmail(), equals(true));
-    expect('foo@bar.com.au'.isEmail(), equals(true));
-    expect('foo+bar@bar.com'.isEmail(), equals(true));
-    expect('hans.m端ller@test.com'.isEmail(), equals(true));
-    expect('hans@m端ller.com'.isEmail(), equals(true));
-    expect('test|123@m端ller.com'.isEmail(), equals(true));
-    expect('test+ext@gmail.com'.isEmail(), equals(true));
-    expect('some.name.midd.leNa.me.+extension@GoogleMail.com'.isEmail(),
+    expect('foo@bar.com'.isEmail, equals(true));
+    expect('x@x.x'.isEmail, equals(true));
+    expect('foo@bar.com.au'.isEmail, equals(true));
+    expect('foo+bar@bar.com'.isEmail, equals(true));
+    expect('hans.m端ller@test.com'.isEmail, equals(true));
+    expect('hans@m端ller.com'.isEmail, equals(true));
+    expect('test|123@m端ller.com'.isEmail, equals(true));
+    expect('test+ext@gmail.com'.isEmail, equals(true));
+    expect('some.name.midd.leNa.me.+extension@GoogleMail.com'.isEmail,
         equals(true));
     // invalid
-    expect('invalidemail@'.isEmail(), equals(false));
-    expect('invalid.com'.isEmail(), equals(false));
-    expect('@invalid.com'.isEmail(), equals(false));
-    expect('foo@bar.com.'.isEmail(), equals(false));
-    expect('foo@bar.co.uk.'.isEmail(), equals(false));
+    expect('invalidemail@'.isEmail, equals(false));
+    expect('invalid.com'.isEmail, equals(false));
+    expect('@invalid.com'.isEmail, equals(false));
+    expect('foo@bar.com.'.isEmail, equals(false));
+    expect('foo@bar.co.uk.'.isEmail, equals(false));
   });
 
   test('strings is valid url', () {
@@ -124,132 +124,132 @@ void main() {
 
   test('strings contains only letters (a-zA-Z)', () {
     // valid
-    expect('abc'.isAlpha(), equals(true));
-    expect('ABC'.isAlpha(), equals(true));
-    expect('FoObAr'.isAlpha(), equals(true));
+    expect('abc'.isAlpha, equals(true));
+    expect('ABC'.isAlpha, equals(true));
+    expect('FoObAr'.isAlpha, equals(true));
     // invalid
-    expect('abc1'.isAlpha(), equals(false));
-    expect('AB  C'.isAlpha(), equals(false));
-    expect(''.isAlpha(), equals(false));
+    expect('abc1'.isAlpha, equals(false));
+    expect('AB  C'.isAlpha, equals(false));
+    expect(''.isAlpha, equals(false));
   });
 
   test('string contains only letters and numbers', () {
     // valid
-    expect('abc1'.isAlphanumeric(), equals(true));
-    expect('0A1BC'.isAlphanumeric(), equals(true));
-    expect('Fo0bAr'.isAlphanumeric(), equals(true));
+    expect('abc1'.isAlphanumeric, equals(true));
+    expect('0A1BC'.isAlphanumeric, equals(true));
+    expect('Fo0bAr'.isAlphanumeric, equals(true));
     // invalid
-    expect('abc!'.isAlphanumeric(), equals(false));
-    expect('AB C'.isAlphanumeric(), equals(false));
-    expect(''.isAlphanumeric(), equals(false));
+    expect('abc!'.isAlphanumeric, equals(false));
+    expect('AB C'.isAlphanumeric, equals(false));
+    expect(''.isAlphanumeric, equals(false));
   });
 
   test('string contains only numbers', () {
     // valid
-    expect('-1'.isNumeric(), equals(true));
-    expect('0'.isNumeric(), equals(true));
-    expect('00'.isNumeric(), equals(true));
-    expect('01'.isNumeric(), equals(true));
-    expect('19934'.isNumeric(), equals(true));
-    expect('-23412'.isNumeric(), equals(true));
+    expect('-1'.isNumeric, equals(true));
+    expect('0'.isNumeric, equals(true));
+    expect('00'.isNumeric, equals(true));
+    expect('01'.isNumeric, equals(true));
+    expect('19934'.isNumeric, equals(true));
+    expect('-23412'.isNumeric, equals(true));
     // invalid
-    expect('abc!'.isNumeric(), equals(false));
-    expect('AB C'.isNumeric(), equals(false));
-    expect(''.isNumeric(), equals(false));
-    expect('1.2'.isNumeric(), equals(false));
+    expect('abc!'.isNumeric, equals(false));
+    expect('AB C'.isNumeric, equals(false));
+    expect(''.isNumeric, equals(false));
+    expect('1.2'.isNumeric, equals(false));
   });
 
   test('string contains only numbers', () {
     // valid
     expect(
         'TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4='
-            .isBase64(),
+            .isBase64,
         equals(true));
-    expect('Vml2YW11cyBmZXJtZW50dW0gc2VtcGVyIHBvcnRhLg=='.isBase64(),
+    expect('Vml2YW11cyBmZXJtZW50dW0gc2VtcGVyIHBvcnRhLg=='.isBase64,
         equals(true));
-    expect('U3VzcGVuZGlzc2UgbGVjdHVzIGxlbw=='.isBase64(), equals(true));
+    expect('U3VzcGVuZGlzc2UgbGVjdHVzIGxlbw=='.isBase64, equals(true));
     expect(
         'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuMPNS1Ufof9EW/M98FNwUAKrwflsqVxaxQjBQnHQmiI7Vac40t8x7pIb8gLGV6wL7sBTJiPovJ0V7y7oc0YerhKh0Rm4skP2z/jHwwZICgGzBvA0rH8xlhUiTvcwDCJ0kc+fh35hNt8srZQM4619FTgB66Xmp4EtVyhpQV+t02g6NzK72oZI0vnAvqhpkxLeLiMCyrI416wHm5TkukhxQmcL2a6hNOyu0ixX/x2kSFXApEnVrJ+/IxGyfyw8kf4N2IZpW5nEP847lpfj0SZZFwrd1mnfnDbYohX2zRptLy2ZUn06Qo9pkG5ntvFEPo9bfZeULtjYzIl6K8gJ2uGZHQIDAQAB'
-            .isBase64(),
+            .isBase64,
         equals(true));
     // invalid
-    expect('abc!'.isBase64(), equals(false));
-    expect('AB C'.isBase64(), equals(false));
-    expect('Vml2YW11cyBmZXJtZtesting123'.isBase64(), equals(false));
-    expect(''.isBase64(), equals(false));
+    expect('abc!'.isBase64, equals(false));
+    expect('AB C'.isBase64, equals(false));
+    expect('Vml2YW11cyBmZXJtZtesting123'.isBase64, equals(false));
+    expect(''.isBase64, equals(false));
   });
 
   test('string is an integer', () {
     // valid
-    expect('-1'.isInt(), equals(true));
-    expect('0'.isInt(), equals(true));
-    expect('10'.isInt(), equals(true));
-    expect('23423'.isInt(), equals(true));
-    expect('19934'.isInt(), equals(true));
-    expect('-23412'.isInt(), equals(true));
+    expect('-1'.isInt, equals(true));
+    expect('0'.isInt, equals(true));
+    expect('10'.isInt, equals(true));
+    expect('23423'.isInt, equals(true));
+    expect('19934'.isInt, equals(true));
+    expect('-23412'.isInt, equals(true));
     // invalid
-    expect('-01'.isInt(), equals(false));
-    expect('000'.isInt(), equals(false));
-    expect('12.13'.isInt(), equals(false));
-    expect('AB'.isInt(), equals(false));
-    expect(''.isInt(), equals(false));
+    expect('-01'.isInt, equals(false));
+    expect('000'.isInt, equals(false));
+    expect('12.13'.isInt, equals(false));
+    expect('AB'.isInt, equals(false));
+    expect(''.isInt, equals(false));
   });
 
   test('string is a float', () {
     // valid
-    expect('-1.324'.isFloat(), equals(true));
-    expect('0.32'.isFloat(), equals(true));
-    expect('-0.324'.isFloat(), equals(true));
-    expect('2423.234234'.isFloat(), equals(true));
-    expect('-0.22250738585072011e-307'.isFloat(), equals(true));
-    expect('0.22250738585072011e-307'.isFloat(), equals(true));
+    expect('-1.324'.isFloat, equals(true));
+    expect('0.32'.isFloat, equals(true));
+    expect('-0.324'.isFloat, equals(true));
+    expect('2423.234234'.isFloat, equals(true));
+    expect('-0.22250738585072011e-307'.isFloat, equals(true));
+    expect('0.22250738585072011e-307'.isFloat, equals(true));
     // invalid
-    expect('abc!'.isFloat(), equals(false));
-    expect('AB C'.isFloat(), equals(false));
-    expect(' '.isFloat(), equals(false));
+    expect('abc!'.isFloat, equals(false));
+    expect('AB C'.isFloat, equals(false));
+    expect(' '.isFloat, equals(false));
   });
 
   test('string is a hexadecimal number', () {
     // valid
-    expect('deadBEEF'.isHexadecimal(), equals(true));
-    expect('ff0044'.isHexadecimal(), equals(true));
+    expect('deadBEEF'.isHexadecimal, equals(true));
+    expect('ff0044'.isHexadecimal, equals(true));
     // invalid
-    expect('abcdefg'.isHexadecimal(), equals(false));
-    expect(' '.isHexadecimal(), equals(false));
-    expect('..'.isHexadecimal(), equals(false));
+    expect('abcdefg'.isHexadecimal, equals(false));
+    expect(' '.isHexadecimal, equals(false));
+    expect('..'.isHexadecimal, equals(false));
   });
 
   test('string is a hexadecimal color', () {
     // valid
-    expect('#ff0034'.isHexColor(), equals(true));
-    expect('#CCCCCC'.isHexColor(), equals(true));
-    expect('fff'.isHexColor(), equals(true));
-    expect('#f00'.isHexColor(), equals(true));
+    expect('#ff0034'.isHexColor, equals(true));
+    expect('#CCCCCC'.isHexColor, equals(true));
+    expect('fff'.isHexColor, equals(true));
+    expect('#f00'.isHexColor, equals(true));
     // invalid
-    expect('#ff'.isHexColor(), equals(false));
-    expect('fff0'.isHexColor(), equals(false));
-    expect('#ff12FG'.isHexColor(), equals(false));
+    expect('#ff'.isHexColor, equals(false));
+    expect('fff0'.isHexColor, equals(false));
+    expect('#ff12FG'.isHexColor, equals(false));
   });
 
   test('string is lowercase', () {
     // valid
-    expect('abc'.isLowercase(), equals(true));
-    expect('abc123'.isLowercase(), equals(true));
-    expect('l.o.w.e.r.'.isLowercase(), equals(true));
-    expect('tr竪s 端ber'.isLowercase(), equals(true));
+    expect('abc'.isLowercase, equals(true));
+    expect('abc123'.isLowercase, equals(true));
+    expect('l.o.w.e.r.'.isLowercase, equals(true));
+    expect('tr竪s 端ber'.isLowercase, equals(true));
     // invalid
-    expect('f00Bar'.isLowercase(), equals(false));
-    expect('uUu'.isLowercase(), equals(false));
+    expect('f00Bar'.isLowercase, equals(false));
+    expect('uUu'.isLowercase, equals(false));
   });
 
   test('string is uppercase', () {
     // valid
-    expect('ABC'.isUppercase(), equals(true));
-    expect('ABC123'.isUppercase(), equals(true));
-    expect('U.P.P.E.R.'.isUppercase(), equals(true));
+    expect('ABC'.isUppercase, equals(true));
+    expect('ABC123'.isUppercase, equals(true));
+    expect('U.P.P.E.R.'.isUppercase, equals(true));
     // invalid
-    expect('f00Bar'.isUppercase(), equals(false));
-    expect('uUu'.isUppercase(), equals(false));
+    expect('f00Bar'.isUppercase, equals(false));
+    expect('uUu'.isUppercase, equals(false));
   });
 
   test('string is a number that\'s divisible by another', () {
@@ -370,17 +370,17 @@ void main() {
 
   test('string is a date', () {
     // valid
-    expect('2012-02-27 13:27:00'.isDate(), equals(true));
-    expect('2012-02-27'.isDate(), equals(true));
-    expect('2011-08-04 12:00'.isDate(), equals(true));
-    expect('2012-02-27 13:27:00.123456z'.isDate(), equals(true));
-    expect('20120227'.isDate(), equals(true));
-    expect('2002-02-27T14:00:00-0500'.isDate(), equals(true));
-    expect('2002-02-27T19:00:00Z'.isDate(), equals(true));
+    expect('2012-02-27 13:27:00'.isDate, equals(true));
+    expect('2012-02-27'.isDate, equals(true));
+    expect('2011-08-04 12:00'.isDate, equals(true));
+    expect('2012-02-27 13:27:00.123456z'.isDate, equals(true));
+    expect('20120227'.isDate, equals(true));
+    expect('2002-02-27T14:00:00-0500'.isDate, equals(true));
+    expect('2002-02-27T19:00:00Z'.isDate, equals(true));
     // invalid
-    expect(''.isDate(), equals(false));
-    expect('aaaafff'.isDate(), equals(false));
-    expect('ABC'.isDate(), equals(false));
+    expect(''.isDate, equals(false));
+    expect('aaaafff'.isDate, equals(false));
+    expect('ABC'.isDate, equals(false));
   });
 
   test('string is a date after the specified date', () {
@@ -459,16 +459,16 @@ void main() {
 
   test('string is a credit card number', () {
     // valid
-    expect('375556917985515'.isCreditCard(), equals(true));
-    expect('36050234196908'.isCreditCard(), equals(true));
-    expect('4716461583322103'.isCreditCard(), equals(true));
-    expect('4716-2210-5188-5662'.isCreditCard(), equals(true));
-    expect('4929 7226 5379 7141'.isCreditCard(), equals(true));
-    expect('5398228707871527'.isCreditCard(), equals(true));
+    expect('375556917985515'.isCreditCard, equals(true));
+    expect('36050234196908'.isCreditCard, equals(true));
+    expect('4716461583322103'.isCreditCard, equals(true));
+    expect('4716-2210-5188-5662'.isCreditCard, equals(true));
+    expect('4929 7226 5379 7141'.isCreditCard, equals(true));
+    expect('5398228707871527'.isCreditCard, equals(true));
     // invalid
-    expect('5398228707871528'.isCreditCard(), equals(false));
-    expect(''.isCreditCard(), equals(false));
-    expect('Lol0'.isCreditCard(), equals(false));
+    expect('5398228707871528'.isCreditCard, equals(false));
+    expect(''.isCreditCard, equals(false));
+    expect('Lol0'.isCreditCard, equals(false));
   });
 
   test('string is an ISBN version 10', () {
@@ -546,92 +546,92 @@ void main() {
 
   test('string is valid JSON', () {
     // valid
-    expect('{"key": "v"}'.isJson(), equals(true));
-    expect('{"1": [1, 2, 3]}'.isJson(), equals(true));
-    expect('[1, 2, 3]'.isJson(), equals(true));
+    expect('{"key": "v"}'.isJson, equals(true));
+    expect('{"1": [1, 2, 3]}'.isJson, equals(true));
+    expect('[1, 2, 3]'.isJson, equals(true));
     // invalid
-    expect('foo'.isJson(), equals(false));
-    expect('{ key: "value" }'.isJson(), equals(false));
-    expect('{ \'key\': \'value\' }'.isJson(), equals(false));
+    expect('foo'.isJson, equals(false));
+    expect('{ key: "value" }'.isJson, equals(false));
+    expect('{ \'key\': \'value\' }'.isJson, equals(false));
   });
 
   test('string contains one or more multibyte chars', () {
     // valid
-    expect('ひらがな・カタカナ、．漢字'.isMultibyte(), equals(true));
-    expect('あいうえお foobar'.isMultibyte(), equals(true));
-    expect('test＠example.com'.isMultibyte(), equals(true));
-    expect('1234abcDEｘｙｚ'.isMultibyte(), equals(true));
+    expect('ひらがな・カタカナ、．漢字'.isMultibyte, equals(true));
+    expect('あいうえお foobar'.isMultibyte, equals(true));
+    expect('test＠example.com'.isMultibyte, equals(true));
+    expect('1234abcDEｘｙｚ'.isMultibyte, equals(true));
     // invalid
-    expect('abc'.isMultibyte(), equals(false));
-    expect('<>@" *.'.isMultibyte(), equals(false));
+    expect('abc'.isMultibyte, equals(false));
+    expect('<>@" *.'.isMultibyte, equals(false));
   });
 
   test('string contains ASCII chars only', () {
     // valid
-    expect('abc'.isAscii(), equals(true));
-    expect('<>@" *.'.isAscii(), equals(true));
+    expect('abc'.isAscii, equals(true));
+    expect('<>@" *.'.isAscii, equals(true));
     // invalid
-    expect('ひらがな・カタカナ、．漢字'.isAscii(), equals(false));
-    expect('あいうえお foobar'.isAscii(), equals(false));
-    expect('test＠example.com'.isAscii(), equals(false));
-    expect('1234abcDEｘｙｚ'.isAscii(), equals(false));
+    expect('ひらがな・カタカナ、．漢字'.isAscii, equals(false));
+    expect('あいうえお foobar'.isAscii, equals(false));
+    expect('test＠example.com'.isAscii, equals(false));
+    expect('1234abcDEｘｙｚ'.isAscii, equals(false));
   });
 
   test('string contains any full-width chars', () {
     // valid
-    expect('ひらがな・カタカナ、．漢字'.isFullWidth(), equals(true));
-    expect('３ー０　ａ＠ｃｏｍ'.isFullWidth(), equals(true));
-    expect('Ｆｶﾀｶﾅﾞﾬ'.isFullWidth(), equals(true));
+    expect('ひらがな・カタカナ、．漢字'.isFullWidth, equals(true));
+    expect('３ー０　ａ＠ｃｏｍ'.isFullWidth, equals(true));
+    expect('Ｆｶﾀｶﾅﾞﾬ'.isFullWidth, equals(true));
     // invalid
-    expect('abc'.isFullWidth(), equals(false));
-    expect('abc123'.isFullWidth(), equals(false));
-    expect(''.isFullWidth(), equals(false));
+    expect('abc'.isFullWidth, equals(false));
+    expect('abc123'.isFullWidth, equals(false));
+    expect(''.isFullWidth, equals(false));
   });
 
   test('string contains any half-width chars', () {
     // valid
-    expect('l-btn_02--active'.isHalfWidth(), equals(true));
-    expect('abc123い'.isHalfWidth(), equals(true));
-    expect('ｶﾀｶﾅﾞﾬ￩'.isHalfWidth(), equals(true));
+    expect('l-btn_02--active'.isHalfWidth, equals(true));
+    expect('abc123い'.isHalfWidth, equals(true));
+    expect('ｶﾀｶﾅﾞﾬ￩'.isHalfWidth, equals(true));
     // invalid
-    expect('００１１'.isHalfWidth(), equals(false));
-    expect('あいうえお'.isHalfWidth(), equals(false));
-    expect(''.isHalfWidth(), equals(false));
+    expect('００１１'.isHalfWidth, equals(false));
+    expect('あいうえお'.isHalfWidth, equals(false));
+    expect(''.isHalfWidth, equals(false));
   });
 
   test('string contains a mixture of full and half-width chars', () {
     // valid
-    expect('ひらがなカタカナ漢字ABCDE'.isVariableWidth(), equals(true));
-    expect('３ー０123'.isVariableWidth(), equals(true));
-    expect('Ｆｶﾀｶﾅﾞﾬ'.isVariableWidth(), equals(true));
-    expect('Good＝Parts'.isVariableWidth(), equals(true));
+    expect('ひらがなカタカナ漢字ABCDE'.isVariableWidth, equals(true));
+    expect('３ー０123'.isVariableWidth, equals(true));
+    expect('Ｆｶﾀｶﾅﾞﾬ'.isVariableWidth, equals(true));
+    expect('Good＝Parts'.isVariableWidth, equals(true));
     // invalid
-    expect('abc'.isVariableWidth(), equals(false));
-    expect('abc123'.isVariableWidth(), equals(false));
-    expect('ひらがな・カタカナ、．漢字'.isVariableWidth(), equals(false));
-    expect('１２３４５６'.isVariableWidth(), equals(false));
-    expect(''.isVariableWidth(), equals(false));
+    expect('abc'.isVariableWidth, equals(false));
+    expect('abc123'.isVariableWidth, equals(false));
+    expect('ひらがな・カタカナ、．漢字'.isVariableWidth, equals(false));
+    expect('１２３４５６'.isVariableWidth, equals(false));
+    expect(''.isVariableWidth, equals(false));
   });
 
   test('string contains any surrogate pairs chars', () {
     // valid
-    expect('𠮷野𠮷'.isSurrogatePair(), equals(true));
-    expect('𩸽'.isSurrogatePair(), equals(true));
-    expect('ABC千𥧄1-2-3'.isSurrogatePair(), equals(true));
+    expect('𠮷野𠮷'.isSurrogatePair, equals(true));
+    expect('𩸽'.isSurrogatePair, equals(true));
+    expect('ABC千𥧄1-2-3'.isSurrogatePair, equals(true));
     // invalid
-    expect('吉野竈'.isSurrogatePair(), equals(false));
-    expect('鮪'.isSurrogatePair(), equals(false));
-    expect('ABC1-2-3'.isSurrogatePair(), equals(false));
+    expect('吉野竈'.isSurrogatePair, equals(false));
+    expect('鮪'.isSurrogatePair, equals(false));
+    expect('ABC1-2-3'.isSurrogatePair, equals(false));
   });
 
   test('strings is MongoId', () {
     // valid
-    expect('507f1f77bcf86cd799439011'.isMongoId(), equals(true));
+    expect('507f1f77bcf86cd799439011'.isMongoId, equals(true));
     // invalid
-    expect('507f1f77bcf86cd7994390'.isMongoId(), equals(false));
-    expect('507f1f77bcf86cd7994390111'.isMongoId(), equals(false));
-    expect('G07f1f77bcf86cd799439011'.isMongoId(), equals(false));
-    expect('507f1f77bcf86cd799439011#'.isMongoId(), equals(false));
+    expect('507f1f77bcf86cd7994390'.isMongoId, equals(false));
+    expect('507f1f77bcf86cd7994390111'.isMongoId, equals(false));
+    expect('G07f1f77bcf86cd799439011'.isMongoId, equals(false));
+    expect('507f1f77bcf86cd799439011#'.isMongoId, equals(false));
   });
 
 
