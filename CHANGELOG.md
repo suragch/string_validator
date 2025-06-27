@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.0
+
+-  Fixed IPv4 and IPv6 Validation with Enhanced Regex Patterns (#6) (@Takeda0x64)
+
 ## 1.1.0
 
 - Add extension methods (#5) (@plokmij)
