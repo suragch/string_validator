@@ -115,11 +115,17 @@ void main() {
     expect(v.isIP('1.2.3.4'), equals(true));
     expect(v.isIP('::1'), equals(true));
     expect(v.isIP('2001:db8:0000:1:1:1:1:1'), equals(true));
+    expect(v.isIP('2001:db8::192.0.2.33'), equals(true));
+    expect(v.isIP('2a02:2d8:0:4817:232a::'), equals(true));
+
+
     // invalid
     expect(v.isIP('abc'), equals(false));
     expect(v.isIP('256.0.0.0'), equals(false));
     expect(v.isIP('0.0.0.256'), equals(false));
     expect(v.isIP('26.0.0.256'), equals(false));
+    expect(v.isIP('01.02.03.004'), equals(false));
+
   });
 
   test('strings contains only letters (a-zA-Z)', () {
