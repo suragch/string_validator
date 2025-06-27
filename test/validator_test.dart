@@ -118,6 +118,16 @@ void main() {
     expect(v.isIP('2001:db8::192.0.2.33'), equals(true));
     expect(v.isIP('2a02:2d8:0:4817:232a::'), equals(true));
 
+    expect(v.isIP('2001:0db8:85a3:0000:0000:8a2e:0370:7334'), equals(true));
+    expect(v.isIP('2001:db8::1'), equals(true));
+    expect(v.isIP('::1'), equals(true));
+    expect(v.isIP('fe80::1ff:fe23:4567:890a'), equals(true));
+    expect(v.isIP('ff00::'), equals(true));
+
+
+    // Note: CIDR notation like '2001:db8::/32' is not a valid pure IP address, so validation should be false
+    expect(v.isIP('2001:db8::/32'), equals(false));
+
 
     // invalid
     expect(v.isIP('abc'), equals(false));
@@ -125,6 +135,14 @@ void main() {
     expect(v.isIP('0.0.0.256'), equals(false));
     expect(v.isIP('26.0.0.256'), equals(false));
     expect(v.isIP('01.02.03.004'), equals(false));
+
+    expect(v.isIP('2001:::1'), equals(false));
+    expect(v.isIP('12345::'), equals(false));
+    expect(v.isIP('2001:db8::1/129'), equals(false));
+    expect(v.isIP('gggg::1'), equals(false));
+    expect(v.isIP('2001:db8:85a3::8a2e::7334'), equals(false));
+    expect(v.isIP(':::/64'), equals(false));
+
 
   });
 
